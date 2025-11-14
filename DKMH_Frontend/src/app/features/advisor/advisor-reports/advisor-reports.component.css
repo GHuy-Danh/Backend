@@ -1,0 +1,164 @@
+/* DKMH_Frontend/src/app/features/advisor/reports/advisor-reports.component.css */
+
+/* Dùng lại styles chung từ Advisor Layout */
+
+/* ===== FILTER CARD (Bộ lọc) ===== */
+.filter-card {
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+.filter-card h3 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    border-left: none;
+    padding-left: 0;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-controls select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  width: 200px;
+}
+
+.filter-btn {
+  background-color: #64b5f6;
+  color: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.filter-btn:hover {
+    background-color: #1565c0;
+}
+
+
+/* ===== STATS GRID (Lưới thống kê) ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 1px solid #e0e0e0;
+}
+
+.stat-card h3 {
+  color: #1565c0;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 10px 0;
+}
+
+.stat-value {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-top: 8px;
+  color: #0d47a1;
+}
+
+.stat-value.red {
+  color: #c62828;
+}
+
+.stat-value.green {
+  color: #2e7d32;
+}
+
+/* ===== TABLE (Bảng chi tiết lớp học) ===== */
+.info-card h3 {
+    font-size: 1.3rem;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  min-width: 700px;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+}
+
+thead th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+tbody tr:hover {
+  background-color: #f0f7ff;
+  transition: 0.2s;
+}
+
+/* ===== STATUS (Trạng thái lớp học) ===== */
+.status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.status.success {
+  background-color: #c8e6c9; /* Xanh lá nhạt */
+  color: #256029; /* Xanh lá đậm */
+}
+
+.status.warning {
+  background-color: #fff59d; /* Vàng nhạt */
+  color: #827717; /* Vàng đậm */
+}
+
+.status.danger {
+  background-color: #ffcdd2; /* Đỏ nhạt */
+  color: #b71c1c; /* Đỏ đậm */
+}
+
+.status.full {
+    background-color: #e1bee7; /* Tím nhạt */
+    color: #6a1b9a; /* Tím đậm */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-controls select,
+    .filter-btn {
+        width: 100%;
+    }
+}

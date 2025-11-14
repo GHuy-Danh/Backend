@@ -1,0 +1,81 @@
+/* DKMH_Frontend/src/app/features/advisor/dashboard/advisor-dashboard.component.css */
+
+/* ===== STATS GRID (Lưới thống kê) ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+}
+
+.stat-box {
+  background: #e3f2fd;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid #bbdefb;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.stat-box h4 {
+  color: #0d47a1;
+  font-size: 15px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.stat-box p {
+  font-size: 24px;
+  color: #1565c0;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ===== TABLE (Lớp đang phụ trách) ===== */
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  min-width: 600px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+thead th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+  border-top: 1px solid #bbdefb;
+}
+
+tbody tr:hover {
+  background-color: #f0f7ff;
+  transition: 0.2s;
+}
+
+/* Status styles */
+.status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.status.success {
+  background-color: #c8e6c9; /* Xanh lá nhạt */
+  color: #256029; /* Xanh lá đậm */
+}
+
+.status.warning {
+  background-color: #fff59d; /* Vàng nhạt */
+  color: #827717; /* Vàng đậm */
+}

@@ -1,0 +1,97 @@
+<div class="welcome-card">
+  <h2>🗓️ Lịch dạy & Giảng viên phụ trách</h2>
+  <p>Xem, quản lý và xuất lịch dạy theo tuần của các lớp phụ trách.</p>
+</div>
+
+<div class="info-card filter-card">
+    <h3>Bộ lọc Lịch dạy</h3>
+    <div class="filter-controls">
+        <div class="control-group">
+            <label for="week">Tuần:</label>
+            <select id="week">
+                <option>Tuần 1 (06/10 - 12/10)</option>
+                <option>Tuần 2 (13/10 - 19/10)</option>
+                <option selected>Tuần 3 (20/10 - 26/10)</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label for="teacher">Giảng viên:</label>
+            <select id="teacher">
+                <option>Tất cả</option>
+                <option>Nguyễn Văn Minh</option>
+                <option>Trần Thị Lan</option>
+                <option>Ngô Thanh Sơn</option>
+            </select>
+        </div>
+
+        <button class="btn filter-btn">🔍 Lọc lịch</button>
+        <button class="btn export-btn">📄 Xuất PDF</button>
+    </div>
+</div>
+
+<div class="info-card">
+  <h3>Lịch dạy chi tiết trong tuần (20/10 - 26/10)</h3>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Thứ</th>
+          <th>Tiết học</th>
+          <th>Tên môn học</th>
+          <th>Lớp</th>
+          <th>Giảng viên</th>
+          <th>Phòng</th>
+          <th>Ghi chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="theory-row">
+          <td>Thứ 2</td>
+          <td>1 - 3</td>
+          <td>Lập trình Web</td>
+          <td>CNTT2025A</td>
+          <td>Nguyễn Văn Minh</td>
+          <td>A305</td>
+          <td>Lý thuyết</td>
+        </tr>
+        <tr class="lab-row">
+          <td>Thứ 3</td>
+          <td>4 - 6</td>
+          <td>Phân tích hệ thống</td>
+          <td>CNTT2025B</td>
+          <td>Trần Thị Lan</td>
+          <td>B202</td>
+          <td>Thực hành</td>
+        </tr>
+        <tr class="online-row">
+          <td>Thứ 5</td>
+          <td>1 - 3</td>
+          <td>Trí tuệ nhân tạo</td>
+          <td>CNTT2025C</td>
+          <td>Ngô Thanh Sơn</td>
+          <td>Zoom10</td>
+          <td>Trực tuyến</td>
+        </tr>
+        <tr class="lab-row">
+            <td>Thứ 5</td>
+            <td>7 - 10</td>
+            <td>Thực hành Lập trình Web</td>
+            <td>CNTT2025A</td>
+            <td>Nguyễn Văn Minh</td>
+            <td>Lab D501</td>
+            <td>Thực hành</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="note-card">
+  <h3>Ghi chú phân loại</h3>
+  <ul>
+    <li><span class="color-box theory-color"></span> Lịch dạy **Lý thuyết**</li>
+    <li><span class="color-box lab-color"></span> Lịch dạy **Thực hành (Lab)**</li>
+    <li><span class="color-box online-color"></span> Lịch dạy **Trực tuyến (Online)**</li>
+  </ul>
+</div>

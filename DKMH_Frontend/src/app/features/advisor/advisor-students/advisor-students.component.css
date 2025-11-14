@@ -1,0 +1,158 @@
+/* DKMH_Frontend/src/app/features/advisor/students/advisor-students.component.css */
+
+/* Dùng lại styles từ Advisor Layout cho .welcome-card và .info-card */
+
+/* ===== FILTER CARD (Thẻ bộ lọc) ===== */
+.filter-card {
+  padding: 15px 20px;
+  /* Bỏ box-shadow để làm nổi bật info-card chính */
+  box-shadow: none; 
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 12px 12px 0 0;
+  margin-bottom: 0;
+}
+
+.filter-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-controls input,
+.filter-controls select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-controls input:focus,
+.filter-controls select:focus {
+    border-color: #64b5f6;
+}
+
+.filter-controls input {
+    flex-grow: 1; /* Cho phép ô input chiếm không gian lớn hơn */
+    min-width: 200px;
+    max-width: 300px;
+}
+
+.search-btn {
+  background-color: #64b5f6;
+  color: white;
+  padding: 8px 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.search-btn:hover {
+    background-color: #42a5f5;
+}
+
+/* ===== TABLE (Bảng danh sách sinh viên) ===== */
+.info-card {
+    /* Bảng chính nên có style card đầy đủ */
+    padding-top: 0;
+    margin-top: -1px; /* Kéo lên dính vào filter-card */
+    border-radius: 0 0 16px 16px;
+}
+
+.info-card h3 {
+    padding-top: 20px;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  min-width: 800px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+thead th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+  border-top: 1px solid #bbdefb;
+}
+
+tbody tr:hover {
+  background-color: #f0f7ff;
+  transition: 0.2s;
+}
+
+/* Status styles */
+.status {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-block;
+}
+
+.status.success {
+  background-color: #c8e6c9; 
+  color: #256029; 
+}
+
+.status.warning {
+  background-color: #fff59d; 
+  color: #827717; 
+}
+
+.status.danger {
+    background-color: #ffcdd2; 
+    color: #c62828; 
+}
+
+/* Action button */
+.btn-view {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 7px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.btn-view:hover {
+  background-color: #0d47a1;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-controls input,
+    .filter-controls select,
+    .search-btn {
+        width: 100%;
+        max-width: none;
+    }
+}

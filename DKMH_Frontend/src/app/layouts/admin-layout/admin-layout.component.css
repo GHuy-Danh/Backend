@@ -1,0 +1,131 @@
+/* src/app/layouts/admin-layout/admin-layout.component.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.logo{
+  border-radius: 12px;
+  width: 60px;
+}
+
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5faff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+/* ===== HEADER (CŨNG NÊN TÁCH THÀNH COMPONENT RIÊNG NẾU QUÁ PHỨC TẠP) ===== */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e3f2fd;
+  padding: 10px 30px;
+  border-bottom: 2px solid #bbdefb;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin: 0;
+  width: 100%;
+  position: fixed; /* giữ cố định nếu cần */
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 45px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #0d47a1;
+  font-weight: 500;
+}
+
+.logout-btn {
+  background-color: #ef5350;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== MAIN ===== */
+.admin-main {
+  display: flex;
+  flex: 1;
+  padding: 80px 20px 20px 20px;
+  gap: 20px;
+}
+
+/* ===== SIDEBAR (CŨNG NÊN TÁCH THÀNH COMPONENT RIÊNG) ===== */
+.sidebar {
+  width: 240px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  padding: 20px 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: #0d47a1;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border-bottom: 2px solid #e3f2fd;
+}
+
+.sidebar li.active {
+  background-color: #e3f2fd;
+  border-left: 4px solid #1565c0;
+}
+
+.sidebar li:hover {
+  background-color: #eaf3ff;
+  color: #1565c0;
+}
+
+/* ===== CONTENT (CHUNG) ===== */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px solid #bbdefb;
+  font-size: 14px;
+}

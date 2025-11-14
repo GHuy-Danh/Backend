@@ -1,0 +1,167 @@
+/* DKMH_Frontend/src/app/features/admin/timetable/admin-timetable.component.css */
+
+/* ===== CONTENT WRAPPER ===== */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== TOOLBAR (Filter/Add button) ===== */
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toolbar h3 {
+  color: #1565c0;
+}
+
+.toolbar-controls {
+  display: flex;
+  gap: 10px;
+}
+
+select {
+  padding: 8px 10px;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* ===== TIMETABLE TABLE ===== */
+.timetable-container {
+  overflow-x: auto; /* Cho phép cuộn ngang nếu màn hình nhỏ */
+}
+
+.timetable-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px; /* Đảm bảo bảng không bị vỡ quá mức */
+}
+
+.timetable-table th,
+.timetable-table td {
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  padding: 5px; /* Giảm padding */
+  vertical-align: top;
+  height: 100px; /* Chiều cao cố định cho ô lịch */
+}
+
+.timetable-table th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  padding: 10px 5px;
+}
+
+/* Định dạng buổi học */
+.course {
+  padding: 8px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  margin: 0 auto;
+  max-width: 150px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.course:hover {
+    opacity: 0.9;
+}
+
+.course b {
+  display: block;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.course.theory {
+  background-color: #43a047; /* Xanh lá cây đậm */
+}
+
+.course.lab {
+  background-color: #2e7d32; /* Xanh lá cây rất đậm */
+}
+
+.course.online {
+  background-color: #42a5f5; /* Xanh dương */
+}
+
+.course.exam {
+  background-color: #fdd835; /* Vàng */
+  color: #333;
+}
+
+.course.off {
+  background-color: #e53935; /* Đỏ */
+}
+
+
+/* ===== FORM ===== */
+.form-section h3 {
+  color: #1565c0;
+  margin-bottom: 10px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #0d47a1;
+}
+
+input,
+.form-group select {
+  padding: 8px 10px;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+  color: white;
+}
+
+.add-btn {
+  background-color: #42a5f5;
+}
+
+.save-btn {
+  background-color: #2e7d32;
+  margin-top: 10px;
+  align-self: flex-start; /* Nút save nằm ở đầu form */
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

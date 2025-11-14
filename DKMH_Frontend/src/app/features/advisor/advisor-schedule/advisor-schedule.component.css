@@ -1,0 +1,173 @@
+/* DKMH_Frontend/src/app/features/advisor/schedule/advisor-schedule.component.css */
+
+/* Dùng lại styles chung từ Advisor Layout cho các thẻ cơ bản */
+
+/* ===== FILTER CARD (Bộ lọc) ===== */
+.filter-card {
+    padding: 15px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+.filter-card h3 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    border-left: none;
+    padding-left: 0;
+}
+
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filter-controls label {
+    font-weight: 500;
+    color: #333;
+}
+
+.filter-controls select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+}
+
+.filter-btn {
+  background-color: #64b5f6;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.export-btn {
+  background-color: #2e7d32;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.filter-btn:hover { background-color: #1565c0; }
+.export-btn:hover { background-color: #1b5e20; }
+
+/* ===== TABLE (Bảng lịch dạy) ===== */
+.info-card h3 {
+    font-size: 1.3rem;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  min-width: 800px;
+}
+
+th,
+td {
+  padding: 12px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+  font-size: 14px;
+}
+
+thead th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+tbody tr:hover {
+  background-color: #f0f7ff;
+  transition: 0.2s;
+}
+
+/* Row color coding (Dùng để tô màu hàng theo loại lịch) */
+.theory-row {
+    background-color: #e8f5e9; /* Light Green */
+}
+.lab-row {
+    background-color: #fffde7; /* Light Yellow */
+}
+.online-row {
+    background-color: #e3f2fd; /* Light Blue */
+}
+
+/* ===== NOTE (Ghi chú) ===== */
+.note-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.note-card h3 {
+  color: #1565c0;
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  border-left: none;
+  padding-left: 0;
+}
+
+.note-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.note-card li {
+    font-size: 0.9rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.color-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+    margin-right: 6px;
+    display: inline-block;
+}
+
+.theory-color { background-color: #43a047; }
+.lab-color { background-color: #ffc107; }
+.online-color { background-color: #42a5f5; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-group,
+    .filter-controls select,
+    .filter-btn,
+    .export-btn {
+        width: 100%;
+    }
+}

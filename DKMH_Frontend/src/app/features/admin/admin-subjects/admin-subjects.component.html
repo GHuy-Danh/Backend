@@ -1,0 +1,141 @@
+<div class="content">
+  <div class="info-card toolbar">
+    <h3>Quản lý Môn học</h3>
+    <button class="btn add-btn" (click)="openAddModal()">➕ Thêm Môn học</button>
+  </div>
+
+  <div class="info-card">
+    <h3>Danh sách Môn học</h3>
+
+    <div *ngIf="isLoading" class="alert alert-info">Đang tải dữ liệu...</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <table class="subject-table" *ngIf="!isLoading && !errorMessage">
+      <thead>
+        <tr>
+          <th>Mã HP</th>
+          <th>Tên học phần</th>
+          <th>Khối</th>
+          <th>Loại</th>
+          <th>Học kỳ</th>
+          <th>Tín chỉ</th>
+          <th>Phạm vi</th>
+          <th>Mã CN</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let s of paginatedSubjects">
+          <td>{{ s.ma_hoc_phan }}</td>
+          <td>{{ s.ten_hoc_phan }}</td>
+          <td>{{ s.khoi }}</td>
+          <td>{{ s.loai }}</td>
+          <td>{{ s.hoc_ky }}</td>
+          <td>{{ s.so_tin_chi }}</td>
+          <td>{{ s.pham_vi }}</td>
+          <td>{{ s.ma_chuyen_nganh }}</td>
+          <td>
+            <button class="btn edit" (click)="openEditModal(s)">✏️</button>
+            <button class="btn delete" (click)="deleteSubject(s.ma_hoc_phan)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 🔹 Phân trang -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="btn page-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        ◀ Trước
+      </button>
+      <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+      <button class="btn page-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Sau ▶
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL THÊM -->
+<div class="modal-backdrop" *ngIf="isAddModalOpen" (click)="closeAddModal()"></div>
+<div class="modal" [class.open]="isAddModalOpen">
+  <div class="modal-content">
+    <h3>➕ Thêm Môn học mới</h3>
+    <form (ngSubmit)="submitAddForm()">
+      <div class="form-row">
+        <input [(ngModel)]="addFormModel.ma_hoc_phan" name="ma_hoc_phan" placeholder="Mã học phần" required />
+        <input [(ngModel)]="addFormModel.ten_hoc_phan" name="ten_hoc_phan" placeholder="Tên học phần" required />
+      </div>
+
+      <div class="form-row">
+        <select [(ngModel)]="addFormModel.khoi" name="khoi" required>
+          <option value="">Chọn khối</option>
+          <option value="Cơ sở ngành">Cơ sở ngành</option>
+          <option value="Chuyên ngành">Chuyên ngành</option>
+          <option value="Đại cương">Đại cương</option>
+        </select>
+        <select [(ngModel)]="addFormModel.loai" name="loai" required>
+          <option value="">Chọn loại</option>
+          <option value="Bắt buộc">Bắt buộc</option>
+          <option value="Tự chọn">Tự chọn</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <input [(ngModel)]="addFormModel.hoc_ky" name="hoc_ky" type="number" placeholder="Học kỳ" required />
+        <input [(ngModel)]="addFormModel.so_tin_chi" name="so_tin_chi" type="number" placeholder="Tín chỉ" required />
+      </div>
+
+      <div class="form-row">
+        <input [(ngModel)]="addFormModel.pham_vi" name="pham_vi" placeholder="Phạm vi (VD: Chung, CN...)" />
+        <input [(ngModel)]="addFormModel.ma_chuyen_nganh" name="ma_chuyen_nganh" placeholder="Mã chuyên ngành (ALL/CNPM...)" />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn cancel-btn" (click)="closeAddModal()">Hủy</button>
+        <button class="btn add-btn" type="submit">Thêm</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL SỬA -->
+<div class="modal-backdrop" *ngIf="isEditModalOpen" (click)="closeEditModal()"></div>
+<div class="modal" [class.open]="isEditModalOpen">
+  <div class="modal-content">
+    <h3>💾 Cập nhật môn học</h3>
+    <form (ngSubmit)="submitEditForm()">
+      <div class="form-row">
+        <input [(ngModel)]="editFormModel.ma_hoc_phan" name="edit_ma_hoc_phan" disabled />
+        <input [(ngModel)]="editFormModel.ten_hoc_phan" name="edit_ten_hoc_phan" placeholder="Tên học phần" required />
+      </div>
+
+      <div class="form-row">
+        <select [(ngModel)]="editFormModel.khoi" name="edit_khoi" required>
+          <option value="Cơ sở ngành">Cơ sở ngành</option>
+          <option value="Chuyên ngành">Chuyên ngành</option>
+          <option value="Đại cương">Đại cương</option>
+        </select>
+        <select [(ngModel)]="editFormModel.loai" name="edit_loai" required>
+          <option value="Bắt buộc">Bắt buộc</option>
+          <option value="Tự chọn">Tự chọn</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <input [(ngModel)]="editFormModel.hoc_ky" name="edit_hoc_ky" type="number" placeholder="Học kỳ" required />
+        <input [(ngModel)]="editFormModel.so_tin_chi" name="edit_so_tin_chi" type="number" placeholder="Tín chỉ" required />
+      </div>
+
+      <div class="form-row">
+        <input [(ngModel)]="editFormModel.pham_vi" name="edit_pham_vi" placeholder="Phạm vi" />
+        <input [(ngModel)]="editFormModel.ma_chuyen_nganh" name="edit_ma_chuyen_nganh" placeholder="Mã chuyên ngành" />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn cancel-btn" (click)="closeEditModal()">Hủy</button>
+        <button class="btn add-btn" type="submit">Lưu</button>
+      </div>
+    </form>
+  </div>
+</div>

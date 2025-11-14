@@ -1,0 +1,37 @@
+/* DKMH_Frontend/src/app/features/student/dashboard/student-dashboard.component.css */
+
+/* Content wrapper trong component con */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%; /* Đảm bảo chiếm hết chiều rộng của content-wrapper */
+}
+
+/* Thẻ chào mừng */
+.welcome-card {
+  background-color: #bbdefb;
+  color: #0d47a1;
+  padding: 15px 20px;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.welcome-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.highlight {
+  color: #1565c0;
+}
+
+/* Sử dụng lại info-card và h3 từ layout CSS */
+.info-card ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.info-card p, .info-card li {
+  margin-bottom: 5px;
+}

@@ -1,0 +1,103 @@
+/* DKMH_Frontend/src/app/features/admin/statistics/admin-statistics.component.css */
+
+/* Định nghĩa chung cho nội dung */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Thẻ thông tin chung (dùng cho filter-bar và chart-box) */
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== SUMMARY CARDS CONTAINER ===== */
+.summary-cards {
+  /* Loại bỏ padding của info-card vì stat-box đã có padding */
+  padding: 0; 
+  box-shadow: none; /* Loại bỏ box-shadow để các thẻ con nổi bật */
+  background: none;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.stat-box {
+  flex: 1;
+  background: #bbdefb;
+  color: #0d47a1;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.stat-box h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.stat-box p {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* ===== FILTER BAR ===== */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-bar label {
+  color: #0d47a1;
+  font-weight: 500;
+}
+
+.filter-bar select {
+  padding: 6px 10px;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+}
+
+.refresh-btn {
+  background-color: #42a5f5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.refresh-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== CHARTS GRID ===== */
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.chart-box h3 {
+  color: #1565c0;
+  margin-bottom: 10px;
+}
+
+/* Thiết lập để biểu đồ cuối cùng chiếm hết chiều rộng của grid */
+.full-width {
+  grid-column: 1 / span 2;
+}
+
+/* Đảm bảo canvas có kích thước hợp lý để biểu đồ hiển thị được */
+.chart-box canvas {
+  max-width: 100%;
+  height: 300px; /* Chiều cao mặc định cho biểu đồ */
+}

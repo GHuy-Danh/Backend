@@ -1,0 +1,113 @@
+<div class="content">
+  <div class="info-card toolbar">
+    <h3>Danh sách lớp học</h3>
+    <div class="toolbar-controls">
+      <select>
+        <option>Tất cả học kỳ</option>
+        <option>Học kỳ 2025.1</option>
+        <option>Học kỳ 2024.2</option>
+      </select>
+      <select>
+        <option>Tất cả khoa</option>
+        <option>Công nghệ thông tin</option>
+        <option>An toàn thông tin</option>
+      </select>
+      <button class="btn auto-btn">⚙️ Phân lớp tự động</button>
+      <button class="btn add-btn">➕ Thêm lớp mới</button>
+    </div>
+  </div>
+
+  <div class="info-card">
+    <table class="class-table">
+      <thead>
+        <tr>
+          <th>Mã lớp</th>
+          <th>Tên lớp</th>
+          <th>Môn học</th>
+          <th>Sĩ số</th>
+          <th>Giảng viên</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CNTT2024A</td>
+          <td>Lập trình Web - Nhóm 1</td>
+          <td>Lập trình Web</td>
+          <td>30 / 40</td>
+          <td>ThS. Nguyễn Văn B</td>
+          <td><span class="status open">Đang học</span></td>
+          <td>
+            <button class="btn edit">✏️</button>
+            <button class="btn delete">🗑️</button>
+          </td>
+        </tr>
+        <tr>
+          <td>CNTT2024B</td>
+          <td>Phân tích HTTT - Nhóm 2</td>
+          <td>Phân tích hệ thống thông tin</td>
+          <td>42 / 45</td>
+          <td>TS. Lê Thị Hoa</td>
+          <td><span class="status full">Đủ lớp</span></td>
+          <td>
+            <button class="btn edit">✏️</button>
+            <button class="btn delete">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-card form-section">
+    <h3>Thêm / Cập nhật lớp học</h3>
+    <form>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Mã lớp:</label>
+          <input type="text" placeholder="VD: CNTT2025A" />
+        </div>
+        <div class="form-group">
+          <label>Tên lớp:</label>
+          <input type="text" placeholder="VD: Lập trình Web - Nhóm 1" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Môn học:</label>
+          <select>
+            <option>-- Chọn môn học --</option>
+            <option>Lập trình Web</option>
+            <option>Hệ điều hành</option>
+            <option>Trí tuệ nhân tạo</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Giảng viên:</label>
+          <select>
+            <option>-- Chọn giảng viên --</option>
+            <option>ThS. Nguyễn Văn B</option>
+            <option>TS. Lê Thị Hoa</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Sĩ số tối đa:</label>
+          <input type="number" min="1" placeholder="VD: 40" />
+        </div>
+        <div class="form-group">
+          <label>Trạng thái:</label>
+          <select>
+            <option>Đang học</option>
+            <option>Đã kết thúc</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn save-btn">💾 Lưu lớp học</button>
+    </form>
+  </div>
+</div>

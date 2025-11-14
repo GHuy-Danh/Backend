@@ -1,0 +1,115 @@
+<div class="content">
+  <div class="info-card toolbar">
+    <h3>Danh sách lịch học</h3>
+    <div class="toolbar-controls">
+      <select>
+        <option>Tuần 1 (06/10 - 12/10)</option>
+        <option>Tuần 2 (13/10 - 19/10)</option>
+        <option>Tuần 3 (20/10 - 26/10)</option>
+      </select>
+      <button class="btn add-btn">➕ Thêm buổi học</button>
+    </div>
+  </div>
+
+  <div class="info-card timetable-container">
+    <table class="timetable-table">
+      <thead>
+        <tr>
+          <th>Thứ</th>
+          <th>Ca 1<br /><small>(7:00 - 9:00)</small></th>
+          <th>Ca 2<br /><small>(9:10 - 11:10)</small></th>
+          <th>Ca 3<br /><small>(13:00 - 15:00)</small></th>
+          <th>Ca 4<br /><small>(15:10 - 17:10)</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Thứ 2</td>
+          <td><div class="course theory">Cơ sở dữ liệu<br /><b>Phòng D201</b></div></td>
+          <td></td>
+          <td><div class="course lab">Lập trình Web (TH)<br /><b>Phòng A103</b></div></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Thứ 3</td>
+          <td></td>
+          <td><div class="course online">Phân tích HTTT (Online)</div></td>
+          <td></td>
+          <td><div class="course exam">Thi giữa kỳ CSDL</div></td>
+        </tr>
+        <tr>
+          <td>Thứ 4</td>
+          <td><div class="course off">Nghỉ học</div></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>Thứ 5</td>
+          <td></td>
+          <td><div class="course theory">Trí tuệ nhân tạo<br /><b>Phòng B102</b></div></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="info-card form-section">
+    <h3>Thêm / Cập nhật buổi học</h3>
+    <form>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Thứ:</label>
+          <select>
+            <option>Thứ 2</option>
+            <option>Thứ 3</option>
+            <option>Thứ 4</option>
+            <option>Thứ 5</option>
+            <option>Thứ 6</option>
+            <option>Thứ 7</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ca học:</label>
+          <select>
+            <option>Ca 1 (7:00 - 9:00)</option>
+            <option>Ca 2 (9:10 - 11:10)</option>
+            <option>Ca 3 (13:00 - 15:00)</option>
+            <option>Ca 4 (15:10 - 17:10)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Tên môn học:</label>
+          <input type="text" placeholder="VD: Lập trình Web" />
+        </div>
+        <div class="form-group">
+          <label>Phòng học:</label>
+          <input type="text" placeholder="VD: D201" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Loại buổi học:</label>
+          <select>
+            <option>Lý thuyết</option>
+            <option>Thực hành</option>
+            <option>Online</option>
+            <option>Thi</option>
+            <option>Nghỉ học</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Giảng viên:</label>
+          <input type="text" placeholder="VD: ThS. Nguyễn Văn B" />
+        </div>
+      </div>
+
+      <button class="btn save-btn">💾 Lưu lịch học</button>
+    </form>
+  </div>
+</div>

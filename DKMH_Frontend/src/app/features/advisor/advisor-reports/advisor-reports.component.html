@@ -1,0 +1,89 @@
+<div class="welcome-card">
+  <h2>📊 Thống kê & Báo cáo học kỳ</h2>
+  <p>Hiển thị tổng quan tình hình đăng ký, lớp học và trạng thái môn học.</p>
+</div>
+
+<div class="info-card filter-card">
+    <h3>Lựa chọn Học kỳ</h3>
+    <div class="filter-controls">
+        <select>
+            <option>Học kỳ 2025.1</option>
+            <option>Học kỳ 2024.2</option>
+            <option>Học kỳ 2024.1</option>
+        </select>
+        <button class="btn filter-btn">
+            <i class="fas fa-file-export"></i> 📄 Xuất báo cáo chi tiết
+        </button>
+    </div>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <h3>👨‍🎓 Số sinh viên đăng ký</h3>
+    <p class="stat-value">125</p>
+  </div>
+  <div class="stat-card">
+    <h3>📚 Tổng môn học mở</h3>
+    <p class="stat-value">28</p>
+  </div>
+  <div class="stat-card">
+    <h3>🚫 Lớp học bị hủy</h3>
+    <p class="stat-value red">3</p>
+  </div>
+  <div class="stat-card">
+    <h3>✅ Lớp đang hoạt động</h3>
+    <p class="stat-value green">25</p>
+  </div>
+</div>
+
+<div class="info-card">
+  <h3>Chi tiết lớp học (Học kỳ 2025.1)</h3>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th>Mã lớp</th>
+          <th>Tên môn học</th>
+          <th>Số SV/Tối đa</th>
+          <th>Giảng viên</th>
+          <th>Trạng thái</th>
+          <th>Ghi chú</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>CNTT2025A</td>
+          <td>Lập trình Web</td>
+          <td>35/40</td>
+          <td>Nguyễn Văn Minh</td>
+          <td><span class="status success">Đang hoạt động</span></td>
+          <td>Đủ điều kiện mở</td>
+        </tr>
+        <tr>
+          <td>CNTT2025B</td>
+          <td>Phân tích hệ thống</td>
+          <td>22/30</td>
+          <td>Trần Thị Lan</td>
+          <td><span class="status warning">Sắp kết thúc</span></td>
+          <td>Thi cuối kỳ ngày 25/11</td>
+        </tr>
+        <tr>
+          <td>CNTT2025C</td>
+          <td>Trí tuệ nhân tạo</td>
+          <td>5/25</td>
+          <td>Ngô Thanh Sơn</td>
+          <td><span class="status danger">Đã hủy</span></td>
+          <td>Không đủ sinh viên</td>
+        </tr>
+        <tr>
+            <td>CNTT2025D</td>
+            <td>Cấu trúc dữ liệu</td>
+            <td>40/40</td>
+            <td>Lê Văn Hùng</td>
+            <td><span class="status full">Đã đầy</span></td>
+            <td>Cần xem xét mở thêm lớp</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

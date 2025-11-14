@@ -1,0 +1,120 @@
+/* DKMH_Frontend/src/app/features/student/support/student-support.component.css */
+
+/* Content wrapper trong component con */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Thẻ tiêu đề (Dùng lại welcome-card) */
+.welcome-card {
+  background-color: #bbdefb;
+  color: #0d47a1;
+  padding: 15px 20px;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.welcome-card h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* ===== INFO CARD (Dùng lại style chung) ===== */
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h3 {
+  color: #1565c0;
+  margin-bottom: 15px;
+  border-left: 4px solid #64b5f6;
+  padding-left: 10px;
+}
+
+/* ===== CONTACT INFO (Thông tin liên hệ) ===== */
+.contact-info p {
+  margin: 8px 0;
+  font-size: 15px;
+  color: #333;
+}
+
+.contact-info b {
+    color: #0d47a1;
+    font-weight: 600;
+}
+
+/* ===== FORM (Biểu mẫu hỗ trợ) ===== */
+.support-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #1565c0;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  border: 1px solid #bbdefb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+  background-color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.btn.submit {
+  /* Dùng lại styles từ layout cho .btn */
+  background-color: #1565c0;
+  color: white;
+  align-self: flex-start; /* Canh nút về bên trái */
+  padding: 10px 20px;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* ===== GUIDE LIST (Hướng dẫn nhanh) ===== */
+.info-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.info-card li {
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #444;
+}
+
+.info-card li b {
+    color: #ef6c00;
+}

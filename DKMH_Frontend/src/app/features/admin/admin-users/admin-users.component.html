@@ -1,0 +1,116 @@
+<div class="content">
+  <div class="info-card toolbar">
+    <h3>Quản lý Người dùng</h3>
+    <button class="btn add-btn" (click)="openAddModal()">➕ Thêm Người dùng</button>
+  </div>
+
+  <div class="info-card">
+    <h3>Danh sách Người dùng</h3>
+
+    <div *ngIf="isLoading" class="alert alert-info">Đang tải danh sách...</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <table class="subject-table" *ngIf="!isLoading && !errorMessage">
+      <thead>
+        <tr>
+          <th>Mã / ID</th>
+          <th>Họ và tên</th>
+          <th>Email</th>
+          <th>Loại tài khoản</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let u of paginatedUsers">
+          <td>{{ u._id }}</td>
+          <td>{{ u.ho_ten }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.loai }}</td>
+          <td>
+            <button class="btn edit" (click)="openEditModal(u)">✏️</button>
+            <button class="btn delete" (click)="deleteUser(u._id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 🔹 Phân trang -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="btn page-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        ◀ Trước
+      </button>
+      <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+      <button class="btn page-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Sau ▶
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL THÊM -->
+<div class="modal-backdrop" *ngIf="isAddModalOpen" (click)="closeAddModal()"></div>
+<div class="modal" [class.open]="isAddModalOpen">
+  <div class="modal-content">
+    <h3>➕ Thêm Người dùng mới</h3>
+
+    <form (ngSubmit)="submitAddForm()">
+      <div class="form-row">
+        <input [(ngModel)]="addFormModel._id" name="add_id" placeholder="Mã người dùng (ví dụ: SV001)" required />
+        <input [(ngModel)]="addFormModel.ho_ten" name="add_ho_ten" placeholder="Họ tên" required />
+      </div>
+
+      <div class="form-row">
+        <input [(ngModel)]="addFormModel.email" name="add_email" placeholder="Email" required />
+        <input [(ngModel)]="addFormModel.mat_khau" name="add_password" type="password" placeholder="Mật khẩu" required />
+      </div>
+
+      <div class="form-row">
+        <select [(ngModel)]="addFormModel.loai" name="add_loai" required>
+          <option value="" disabled selected>Chọn loại tài khoản</option>
+          <option value="Sinh viên">Sinh viên</option>
+          <option value="Giảng viên">Giảng viên</option>
+          <option value="Quản trị viên">Quản trị viên</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn cancel-btn" (click)="closeAddModal()">Hủy</button>
+        <button class="btn add-btn" type="submit">Thêm</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL SỬA -->
+<div class="modal-backdrop" *ngIf="isEditModalOpen" (click)="closeEditModal()"></div>
+<div class="modal" [class.open]="isEditModalOpen">
+  <div class="modal-content">
+    <h3>💾 Cập nhật Người dùng</h3>
+
+    <form (ngSubmit)="submitEditForm()">
+      <div class="form-row">
+        <input [(ngModel)]="editFormModel._id" name="edit_id" placeholder="Mã người dùng" disabled />
+        <input [(ngModel)]="editFormModel.ho_ten" name="edit_ho_ten" placeholder="Họ tên" required />
+      </div>
+
+      <div class="form-row">
+        <input [(ngModel)]="editFormModel.email" name="edit_email" placeholder="Email" required />
+        <input [(ngModel)]="editFormModel.mat_khau" name="edit_password" type="password" placeholder="Mật khẩu (để trống nếu không đổi)" />
+      </div>
+
+      <div class="form-row">
+        <select [(ngModel)]="editFormModel.loai" name="edit_loai" required>
+          <option value="Sinh viên">Sinh viên</option>
+          <option value="Giảng viên">Giảng viên</option>
+          <option value="Quản trị viên">Quản trị viên</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn cancel-btn" (click)="closeEditModal()">Hủy</button>
+        <button class="btn add-btn" type="submit">Lưu</button>
+      </div>
+    </form>
+  </div>
+</div>

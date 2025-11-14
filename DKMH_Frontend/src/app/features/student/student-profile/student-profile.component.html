@@ -1,0 +1,109 @@
+<div class="content">
+  <div class="profile-card">
+    <div class="profile-left">
+      <img src="assets/avatar.png" alt="Sinh viên" class="profile-photo" />
+      <button class="btn edit-btn" (click)="openEditModal()">✏️ Chỉnh sửa</button>
+      <button class="btn edit-btn green-btn" (click)="openPasswordModal()">🔑 Đổi mật khẩu</button>
+    </div>
+
+    <div class="profile-right">
+      <h2>Thông tin cá nhân</h2>
+      <div class="info-grid">
+        <div><label>Mã số sinh viên:</label><p>{{ student._id }}</p></div>
+        <div><label>Họ và tên:</label><p>{{ student.ho_ten }}</p></div>
+        <div><label>Giới tính:</label><p>{{ student.gioi_tinh || '-' }}</p></div>
+        <div><label>Ngày sinh:</label><p>{{ student.ngay_sinh || '-' }}</p></div>
+        <div><label>Lớp:</label><p>{{ student.lop || '-' }}</p></div>
+        <div><label>Ngành học:</label><p>{{ student.nganh_hoc || '-' }}</p></div>
+        <div><label>Email:</label><p>{{ student.email }}</p></div>
+        <div><label>Số điện thoại:</label><p>{{ student.so_dien_thoai || '-' }}</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Modal chỉnh sửa -->
+<div class="modal-backdrop" *ngIf="isModalOpen"></div>
+<div class="modal" [class.open]="isModalOpen">
+  <div class="modal-content">
+    <h3>Chỉnh sửa thông tin cá nhân</h3>
+
+    <div class="form-row"><label>Mã số sinh viên:</label><input type="text" [(ngModel)]="editedStudent._id" readonly /></div>
+    <div class="form-row"><label>Họ và tên:</label><input type="text" [(ngModel)]="editedStudent.ho_ten" readonly /></div>
+
+    <div class="form-row">
+      <label>Giới tính:</label>
+      <select [(ngModel)]="editedStudent.gioi_tinh">
+        <option value="">-- Chọn giới tính --</option>
+        <option value="Nam">Nam</option>
+        <option value="Nữ">Nữ</option>
+        <option value="Khác">Khác</option>
+      </select>
+    </div>
+
+    <div class="form-row"><label>Ngày sinh:</label><input type="date" [(ngModel)]="editedStudent.ngay_sinh" /></div>
+    <div class="form-row"><label>Lớp:</label><input type="text" [(ngModel)]="editedStudent.lop" readonly /></div>
+    <div class="form-row">
+      <label>Ngành học:</label>
+      <select [(ngModel)]="editedStudent.nganh_hoc" disabled>
+        <option *ngFor="let d of departments" [value]="d.ten_nganh">{{ d.ten_nganh }}</option>
+      </select>
+    </div>
+
+    <div class="form-row">
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="editedStudent.email" />
+      <small class="error" *ngIf="emailError">{{ emailError }}</small>
+    </div>
+
+    <div class="form-row">
+      <label>Số điện thoại:</label>
+      <input type="text" [(ngModel)]="editedStudent.so_dien_thoai" />
+      <small class="error" *ngIf="phoneError">{{ phoneError }}</small>
+    </div>
+
+    <div class="modal-actions">
+      <button class="cancel-btn" (click)="closeEditModal()">Hủy</button>
+      <button class="save-btn" (click)="saveProfile()">Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Modal đổi mật khẩu -->
+<div class="modal-backdrop" *ngIf="isPasswordModalOpen"></div>
+<div class="modal" [class.open]="isPasswordModalOpen">
+  <div class="modal-content">
+    <h3>Đổi mật khẩu</h3>
+
+    <div class="form-row">
+      <label>Mật khẩu hiện tại:</label>
+      <div class="password-wrapper">
+        <input [type]="showCurrent ? 'text' : 'password'" [(ngModel)]="currentPassword" />
+        <span class="toggle-icon" (click)="showCurrent = !showCurrent">{{ showCurrent ? '👁️' : '🙈' }}</span>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label>Mật khẩu mới:</label>
+      <div class="password-wrapper">
+        <input [type]="showNew ? 'text' : 'password'" [(ngModel)]="newPassword" />
+        <span class="toggle-icon" (click)="showNew = !showNew">{{ showNew ? '👁️' : '🙈' }}</span>
+      </div>
+      <small class="error" *ngIf="passwordError">{{ passwordError }}</small>
+    </div>
+
+    <div class="form-row">
+      <label>Xác nhận mật khẩu mới:</label>
+      <div class="password-wrapper">
+        <input [type]="showConfirm ? 'text' : 'password'" [(ngModel)]="confirmPassword" />
+        <span class="toggle-icon" (click)="showConfirm = !showConfirm">{{ showConfirm ? '👁️' : '🙈' }}</span>
+      </div>
+      <small class="error" *ngIf="confirmError">{{ confirmError }}</small>
+    </div>
+
+    <div class="modal-actions">
+      <button class="cancel-btn" (click)="closePasswordModal()">Hủy</button>
+      <button class="save-btn" (click)="changePassword()">Lưu</button>
+    </div>
+  </div>
+</div>

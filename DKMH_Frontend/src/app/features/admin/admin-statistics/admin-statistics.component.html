@@ -1,0 +1,47 @@
+<div class="content">
+  <div class="info-card summary-cards">
+    <div class="stat-box">
+      <h3>👨‍🎓 Sinh viên</h3>
+      <p><b>1,258</b></p>
+    </div>
+    <div class="stat-box">
+      <h3>👩‍🏫 Giảng viên</h3>
+      <p><b>124</b></p>
+    </div>
+    <div class="stat-box">
+      <h3>📘 Môn học</h3>
+      <p><b>86</b></p>
+    </div>
+    <div class="stat-box">
+      <h3>🏫 Lớp học</h3>
+      <p><b>210</b></p>
+    </div>
+  </div>
+
+  <div class="info-card filter-bar">
+    <label>Chọn học kỳ:</label>
+    <select>
+      <option>2025.1</option>
+      <option>2024.2</option>
+      <option>2024.1</option>
+    </select>
+    <button class="btn refresh-btn">🔄 Cập nhật thống kê</button>
+  </div>
+
+  <div class="charts-grid">
+    <div class="info-card chart-box">
+      <h3>Tỷ lệ sinh viên theo chuyên ngành</h3>
+      <canvas id="majorChart"></canvas>
+    </div>
+
+    <div class="info-card chart-box">
+      <h3>Số môn học được đăng ký theo học kỳ</h3>
+      <canvas id="subjectChart"></canvas>
+    </div>
+
+    <div class="info-card chart-box full-width">
+      <h3>Lượt đăng ký môn học theo thời gian</h3>
+      <canvas id="trendChart"></canvas>
+    </div>
+  </div>
+</div>
