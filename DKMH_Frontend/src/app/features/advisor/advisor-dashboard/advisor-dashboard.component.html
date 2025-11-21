@@ -1,0 +1,126 @@
+<div class="content">
+  <!-- Welcome Section -->
+  <div class="welcome-card">
+    <div class="welcome-header">
+      <div class="welcome-text">
+        <h2>Xin chào, <span class="highlight">{{ tenGiangVien }}</span> 👋</h2>
+        <p>
+          Tổng quan công tác giảng dạy và cố vấn học tập.
+        </p>
+      </div>
+      
+      <!-- Bộ chọn Học kỳ -->
+      <div class="semester-selector">
+        <label for="hkSelect">Chọn Học kỳ:</label>
+        <select id="hkSelect" [(ngModel)]="selectedHocKy" (change)="onHocKyChange()">
+          <option *ngFor="let hk of hocKyOptions" [value]="hk">Học kỳ {{ hk }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats Grid -->
+  <div class="info-card no-padding-bottom">
+    <h3>Thống kê nhanh (HK {{ selectedHocKy }})</h3>
+    
+    <div class="stats-grid" *ngIf="!isLoading">
+      <!-- Stat 1: Sinh viên -->
+      <div class="stat-box blue">
+        <div class="stat-icon">
+          <span>👨‍🎓</span> <!-- Đã thay icon bằng Emoji -->
+        </div>
+        <div class="stat-content">
+          <h4>Tổng sinh viên</h4>
+          <p>{{ stats.totalStudents }}</p>
+        </div>
+      </div>
+
+      <!-- Stat 2: Môn học -->
+      <div class="stat-box green">
+        <div class="stat-icon">
+          <span>📘</span> <!-- Đã thay icon bằng Emoji -->
+        </div>
+        <div class="stat-content">
+          <h4>Môn học phụ trách</h4>
+          <p>{{ stats.totalSubjects }}</p>
+        </div>
+      </div>
+
+      <!-- Stat 3: Lớp -->
+      <div class="stat-box purple">
+        <div class="stat-icon">
+          <span>🏫</span> <!-- Đã thay icon bằng Emoji -->
+        </div>
+        <div class="stat-content">
+          <h4>Lớp học phần</h4>
+          <p>{{ stats.totalClasses }}</p>
+        </div>
+      </div>
+
+      <!-- Stat 4: Cảnh báo -->
+      <div class="stat-box orange">
+        <div class="stat-icon">
+          <span>⚠️</span> <!-- Đã thay icon bằng Emoji -->
+        </div>
+        <div class="stat-content">
+          <h4>Lớp cần chú ý</h4>
+          <p>{{ stats.problemClasses }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Loading Skeleton -->
+    <div class="stats-grid" *ngIf="isLoading">
+      <div class="stat-box skeleton" *ngFor="let i of [1,2,3,4]"></div>
+    </div>
+  </div>
+
+  <!-- Classes Table -->
+  <div class="info-card">
+    <h3>Danh sách Lớp đang phụ trách</h3>
+    
+    <div class="table-scroll" *ngIf="!isLoading && classesList.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Mã Lớp HP</th>
+            <th>Tên Môn Học</th>
+            <th>Phòng</th>
+            <th class="text-center">Số Sinh Viên</th>
+            <th>Tình trạng</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let lop of classesList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td class="fw-bold text-primary">{{ lop.ma_lop_hp }}</td>
+            <td>{{ lop.ten_hp }}</td>
+            <td>{{ lop.phong }}</td>
+            <td class="text-center">
+              <span class="badge-number">{{ lop.so_sv }}</span>
+            </td>
+            <td>
+              <span class="status" 
+                [ngClass]="{
+                  'success': lop.trang_thai === 'Ổn định',
+                  'warning': lop.trang_thai === 'Cần chú ý',
+                  'info': lop.trang_thai === 'Lớp đông'
+                }">
+                {{ lop.trang_thai }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="!isLoading && classesList.length === 0" class="empty-state">
+      <p>Chưa có lớp học phần nào được phân công trong Học kỳ {{ selectedHocKy }}.</p>
+    </div>
+
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div> Đang tải dữ liệu...
+    </div>
+  </div>
+</div>

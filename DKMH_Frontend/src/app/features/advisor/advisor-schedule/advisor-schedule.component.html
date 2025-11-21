@@ -1,0 +1,114 @@
+<div class="content">
+  <!-- Welcome Section -->
+  <div class="welcome-card">
+    <div class="welcome-content">
+      <h2>🗓️ Lịch dạy Giảng viên</h2>
+      <p>
+        Xem lịch dạy chi tiết tuần này của giảng viên <span class="highlight">{{ tenGiangVien }}</span>.
+      </p>
+    </div>
+  </div>
+
+  <!-- Filter & Controls Section -->
+  <div class="info-card">
+    <div class="card-header">
+      <h3>🔍 Bộ lọc & Tùy chọn</h3>     
+    </div>
+    
+    <div class="filter-controls">
+      <!-- Chọn Tuần -->
+      <div class="control-group">
+        <label>Chọn tuần ({{ getWeekRange() }}):</label>
+        <div class="week-navigator">
+          <button class="nav-btn" (click)="changeWeek(-7)">❮</button>
+          <input 
+            type="date" 
+            [ngModel]="currentDate | date:'yyyy-MM-dd'" 
+            (ngModelChange)="onDateChange($event)" 
+            class="date-input"
+          />
+          <button class="nav-btn" (click)="changeWeek(7)">❯</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Schedule Table Section -->
+  <div class="info-card">
+    <h3>📋 Chi tiết Lịch dạy</h3>
+    
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="state-box loading">
+      <div class="spinner"></div>
+      <span>Đang tải dữ liệu lịch dạy...</span>
+    </div>
+    
+    <!-- Error State -->
+    <div *ngIf="errorMessage" class="state-box error">
+      <span>⚠️ {{ errorMessage }}</span>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && !errorMessage && filteredSchedule.length === 0" class="state-box empty">
+      <span>📭 Không có lịch dạy nào trong tuần này.</span>
+    </div>
+
+    <!-- Data Table -->
+    <div class="table-scroll" *ngIf="!isLoading && !errorMessage && filteredSchedule.length > 0">
+      <table>
+        <thead>
+          <tr>
+            <th class="w-day">Thứ</th>
+            <th class="w-date">Ngày</th>
+            <th class="w-session">Tiết</th>
+            <th>Môn học</th>
+            <th>Lớp HP</th>
+            <th>Phòng</th>
+            <th>Giảng viên</th>
+            <th>Loại hình</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of filteredSchedule" [class]="'row-' + item.loai_phong">
+            <td class="fw-bold">{{ item.thu_hoc }}</td>
+            <td>{{ item.ngay_hoc | date:'dd/MM' }}</td>
+            <td>
+              <span class="badge-time">{{ item.tiet_bat_dau }} - {{ item.tiet_ket_thuc }}</span>
+            </td>
+            <td class="fw-medium">{{ item.ten_hp }}</td>
+            <td class="text-primary">{{ item.ma_lop_hp }}</td>
+            <td>{{ item.phong }}</td>
+            <td>{{ item.ten_gv }}</td>
+            <td>
+              <span class="status-badge" [class]="item.loai_phong">
+                {{ item.trang_thai }}
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Legend / Notes -->
+  <div class="note-card">
+    <h4>Chú thích loại lịch:</h4>
+    <div class="legend-list">
+      <div class="legend-item">
+        <span class="dot theory"></span> Lý thuyết
+      </div>
+      <div class="legend-item">
+        <span class="dot lab"></span> Thực hành
+      </div>
+      <div class="legend-item">
+        <span class="dot online"></span> Trực tuyến
+      </div>
+      <div class="legend-item">
+        <span class="dot exam"></span> Lịch thi
+      </div>
+      <div class="legend-item">
+        <span class="dot off"></span> Nghỉ/Bù
+      </div>
+    </div>
+  </div>
+</div>

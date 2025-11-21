@@ -1,0 +1,138 @@
+<div class="content">
+  <div class="info-card filter-bar">
+    <h3>Bộ lọc nhật ký</h3>
+    <div class="filters">
+      <input type="date" [(ngModel)]="selectedDate" />
+
+      <select [(ngModel)]="selectedRole">
+        <option value="Tất cả">Tất cả người dùng</option>
+        <option value="Quản trị viên">Quản trị viên</option>
+        <option value="Giảng viên">Giảng viên</option>
+        <option value="Sinh viên">Sinh viên</option>
+        <option value="Khác">Hệ thống</option>
+      </select>
+
+      <select [(ngModel)]="selectedAction">
+        <option value="Tất cả">Tất cả hành động</option>
+        <option value="Đăng ký">Đăng ký</option>
+        <option value="Đăng nhập">Đăng nhập</option> </select>
+
+      <button class="btn refresh-btn" (click)="applyFilter()">🔍 Lọc dữ liệu</button>
+      <button class="btn clear-btn" (click)="refresh()">↩️ Làm mới</button>
+    </div>
+  </div>
+
+  <div class="info-card table-container">
+    <h3>Danh sách nhật ký hoạt động</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Thời gian</th>
+          <th>Người dùng</th>
+          <th>Vai trò</th>
+          <th>Hành động</th>
+          <th>Chi tiết</th>
+          <th>Kết quả</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of paginatedLogs">
+          <td>{{ log.thoi_gian }}</td>
+          <td>{{ log.nguoi }}</td>
+          <td>{{ getRoleFromUser(log.nguoi) }}</td>
+          <td>{{ log.hanh_dong }}</td>
+          <td>
+            <small *ngIf="log.chi_tiet">
+              <span *ngIf="log.chi_tiet.ten_nguoi_dung">
+                Tên: {{ log.chi_tiet.ten_nguoi_dung }} |
+              </span>
+              {{ log.chi_tiet.giang_vien ? 'GV: ' + log.chi_tiet.giang_vien + ' | ' : '' }}
+              {{ log.chi_tiet.phong ? 'Phòng: ' + log.chi_tiet.phong + ' | ' : '' }}
+              {{ log.chi_tiet.thu ? 'Thứ: ' + log.chi_tiet.thu + ' | ' : '' }}
+              {{ log.chi_tiet.ca ? 'Ca: ' + log.chi_tiet.ca + ' | ' : '' }}
+            </small>
+          </td>
+          <td>
+            <span
+              class="status"
+              [ngClass]="{
+                success: log.chi_tiet?.trang_thai === 'Hoàn tất đăng ký' || log.chi_tiet?.trang_thai === 'Thành công',
+                fail: log.chi_tiet?.trang_thai === 'Thất bại'
+              }"
+            >
+              {{ log.chi_tiet?.trang_thai || 'Không rõ' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn view-btn" (click)="openDetailModal(log)">🔍</button>
+          </td>
+        </tr>
+
+        <tr *ngIf="paginatedLogs.length === 0">
+          <td colspan="7" style="text-align: center; padding: 20px; color: #888">
+            Không có dữ liệu nhật ký phù hợp.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="btn page-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        ◀ Trước
+      </button>
+      <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+      <button class="btn page-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Sau ▶
+      </button>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="isDetailModalOpen" (click)="closeDetailModal()"></div>
+  <div class="modal" [class.open]="isDetailModalOpen">
+    <div class="modal-content">
+      <h3>📋 Chi tiết nhật ký</h3>
+
+      <div *ngIf="selectedLog">
+        <p><strong>Người thực hiện:</strong> {{ selectedLog.nguoi }}</p>
+        <p *ngIf="selectedLog.chi_tiet?.ten_nguoi_dung">
+          <strong>Tên người dùng:</strong> {{ selectedLog.chi_tiet.ten_nguoi_dung }}
+        </p>
+        <p><strong>Thời gian:</strong> {{ selectedLog.thoi_gian }}</p>
+        <p><strong>Hành động:</strong> {{ selectedLog.hanh_dong }}</p>
+
+        <table class="detail-table" *ngIf="selectedLog.chi_tiet">
+          <tr>
+            <th>Trạng thái</th>
+            <td>{{ selectedLog.chi_tiet.trang_thai }}</td>
+          </tr>
+          <tr *ngIf="selectedLog.chi_tiet.giang_vien">
+            <th>Giảng viên</th>
+            <td>{{ selectedLog.chi_tiet.giang_vien }}</td>
+          </tr>
+          <tr *ngIf="selectedLog.chi_tiet.phong">
+            <th>Phòng</th>
+            <td>{{ selectedLog.chi_tiet.phong }}</td>
+          </tr>
+          <tr *ngIf="selectedLog.chi_tiet.thu">
+            <th>Thứ</th>
+            <td>{{ selectedLog.chi_tiet.thu }}</td>
+          </tr>
+          <tr *ngIf="selectedLog.chi_tiet.ca">
+            <th>Ca</th>
+            <td>{{ selectedLog.chi_tiet.ca }}</td>
+          </tr>
+          <tr *ngIf="selectedLog.chi_tiet.si_so_hien_tai">
+            <th>Sĩ số hiện tại</th>
+            <td>{{ selectedLog.chi_tiet.si_so_hien_tai }}</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn cancel-btn" (click)="closeDetailModal()">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

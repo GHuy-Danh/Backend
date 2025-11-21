@@ -1,0 +1,64 @@
+<div class="content">
+  <div class="timetable-container">
+    <div class="timetable-header">
+      <h2>📅 Lịch học, lịch thi theo tuần</h2>
+      <div class="controls">
+        <label>Chọn tuần:</label>
+        <input 
+          type="date" 
+          [ngModel]="currentDate | date:'yyyy-MM-dd'" 
+          (ngModelChange)="onDateChange($event)" 
+        />
+        <button class="btn blue-btn" (click)="changeWeek(-7)">◀ Trước</button>
+        <button class="btn blue-btn" (click)="changeWeek(7)">Tiếp ▶</button>
+      </div>
+    </div>
+    
+    <div *ngIf="isLoading" class="alert alert-info">Đang tải lịch học...</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <div class="timetable-scroll" *ngIf="!isLoading && !errorMessage">
+      <table class="timetable-table">
+        <thead>
+          <tr>
+            <th>Ca học</th>
+            <th *ngFor="let day of weekDays; let i = index">
+              {{ dayNames[day.getDay()] }}<br />
+              {{ day | date:'dd/MM/yyyy' }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let session of sessions">
+            <td class="session">{{ session.name }}</td>
+            
+            <td *ngFor="let day of weekDays; let i = index">
+              <ng-container *ngIf="weeklySchedule[dayNames[day.getDay()]]">
+                  <div 
+                    *ngFor="let course of getScheduleByDayAndSession(dayNames[day.getDay()], session.name)" 
+                    [class]="'course ' + course.loai_phong"
+                  >
+                    <b>{{ course.ten_hp }}</b>
+                    {{ course.ma_lop_hp }}<br />
+                    Tiết: {{ course.tiet_bat_dau }}-{{ course.tiet_ket_thuc }}<br />
+                    Phòng: {{ course.phong }}
+                    <span *ngIf="course.trang_thai === 'Nghỉ'">(Nghỉ)</span>
+                    <br />
+                    Giảng viên: {{ course.ten_gv }}
+                  </div>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="legend">
+      <div class="legend-item"><span class="box theory"></span> Lý thuyết</div>
+      <div class="legend-item"><span class="box lab"></span> Thực hành</div>
+      <div class="legend-item"><span class="box online"></span> Trực tuyến</div>
+      <div class="legend-item"><span class="box exam"></span> Lịch thi</div>
+      <div class="legend-item"><span class="box off"></span> Nghỉ học</div>
+    </div>
+  </div>
+</div>

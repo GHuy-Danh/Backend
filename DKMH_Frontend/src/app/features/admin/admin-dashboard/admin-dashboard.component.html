@@ -1,0 +1,47 @@
+<div class="dashboard-container">
+  <div class="welcome-card">
+    <h2>Xin chào, <span class="highlight">{{ adminName }}</span></h2>
+    <p>Chào mừng bạn đến với bảng điều khiển hệ thống đăng ký môn học.</p>
+  </div>
+
+  <!-- Thống kê tổng quan -->
+  <div class="stats-grid">
+    <div class="stat-card students">
+      <h3>👨‍🎓 Sinh viên</h3>
+      <p>{{ stats.sinhVien }}</p>
+    </div>
+    <div class="stat-card teachers">
+      <h3>👩‍🏫 Giảng viên</h3>
+      <p>{{ stats.giangVien }}</p>
+    </div>
+    <div class="stat-card admin">
+      <h3>🧑‍💼 Quản trị viên</h3>
+      <p>{{ stats.quanTri }}</p>
+    </div>
+    <div class="stat-card subjects">
+      <h3>📚 Môn học</h3>
+      <p>{{ stats.monHoc }}</p>
+    </div>
+    <div class="stat-card classes">
+      <h3>🏫 Lớp học phần</h3>
+      <p>{{ stats.lopHocPhan }}</p>
+    </div>
+  </div>
+
+  <!-- Biểu đồ thống kê -->
+  <div class="info-card chart-card">
+    <h3>Biểu đồ thống kê tổng quan</h3>
+    <p-chart type="bar" [data]="chartData" [options]="chartOptions" style="width: 100%; height: 350px;"></p-chart>
+  </div>
+
+  <!-- Hoạt động gần đây -->
+  <div class="info-card">
+    <h3>Hoạt động gần đây</h3>
+    <ul>
+      <li *ngFor="let log of recentLogs">
+        🔹 <b>{{ log.hanh_dong }}</b> – {{ log.nguoi }} ({{ log.thoi_gian | date: 'HH:mm dd/MM/yyyy' }})
+      </li>
+      <li *ngIf="recentLogs.length === 0">Không có hoạt động nào gần đây.</li>
+    </ul>
+  </div>
+</div>

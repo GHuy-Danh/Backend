@@ -1,0 +1,93 @@
+<div class="content">
+  <!-- ===== Thanh công cụ & Bộ lọc ===== -->
+  <div class="info-card filter-bar">
+    <h3>Danh sách giảng viên</h3>
+    <div class="filters">
+      <select [(ngModel)]="selectedNganh" (change)="applyFilter()">
+        <option value="Tất cả">Tất cả ngành</option>
+        <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+        <option value="Giáo dục đại cương">Giáo dục đại cương</option>
+        <option value="Giáo dục an ninh">Giáo dục an ninh</option>
+        <option value="Giáo dục thể chất">Giáo dục thể chất</option>
+      </select>
+
+      <input
+        type="text"
+        placeholder="🔍 Tìm theo tên hoặc mã GV..."
+        [(ngModel)]="searchText"
+        (input)="applyFilter()"
+      />
+
+      <button class="btn refresh-btn" (click)="refresh()">↩️ Làm mới</button>
+    </div>
+  </div>
+
+  <!-- ===== Bảng danh sách ===== -->
+  <div class="info-card table-container">
+    <h3>Danh sách giảng viên</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Mã GV</th>
+          <th>Họ và tên</th>
+          <th>Ngành dạy</th>
+          <th>Email</th>
+          <th>Số điện thoại</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gv of paginatedTeachers">
+          <td>{{ gv.ma_gv }}</td>
+          <td>{{ gv.ten_giang_vien }}</td>
+          <td>{{ gv.nganh_day }}</td>
+          <td>{{ gv.email }}</td>
+          <td>{{ gv.so_dien_thoai }}</td>        
+          <td>
+            <button class="btn view-btn" (click)="openDetailModal(gv)">🔍</button>
+          </td>
+        </tr>
+
+        <tr *ngIf="paginatedTeachers.length === 0">
+          <td colspan="8" style="text-align:center; padding:15px; color:#777">
+            Không có dữ liệu giảng viên phù hợp.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 🔹 Phân trang -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="btn page-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        ◀ Trước
+      </button>
+      <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+      <button class="btn page-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Sau ▶
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== Modal Chi tiết Giảng viên ===== -->
+  <div class="modal-backdrop" *ngIf="isDetailModalOpen" (click)="closeDetailModal()"></div>
+  <div class="modal" [class.open]="isDetailModalOpen">
+    <div class="modal-content">
+      <h3>📋 Thông tin chi tiết giảng viên</h3>
+
+      <div *ngIf="selectedGV">
+        <table class="detail-table">
+          <tr><th>Mã GV</th><td>{{ selectedGV.ma_gv }}</td></tr>
+          <tr><th>Họ tên</th><td>{{ selectedGV.ten_giang_vien }}</td></tr>
+          <tr><th>Ngành dạy</th><td>{{ selectedGV.nganh_day }}</td></tr>
+          <tr><th>Email</th><td>{{ selectedGV.email }}</td></tr>
+          <tr><th>Số điện thoại</th><td>{{ selectedGV.so_dien_thoai }}</td></tr>
+        </table>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn cancel-btn" (click)="closeDetailModal()">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,232 @@
+<div class="content">
+
+  <!-- TOOLBAR -->
+  <div class="info-card toolbar">
+    <h3>Quản lý Lớp học phần</h3>
+
+    <div class="toolbar-actions">
+      <select class="filter-select" [(ngModel)]="selectedHocKy" (change)="onHocKyChange()">
+        <option value="">-- Chọn học kỳ --</option>
+        <option *ngFor="let hk of danhSachHocKy" [value]="hk">Học kỳ {{ hk }}</option>
+      </select>
+
+      <input class="search-input" placeholder="🔍 Tìm kiếm LHP..." [(ngModel)]="searchKey" (input)="applyFilter()">
+
+      <button class="btn purple-btn" (click)="previewAssign()" [disabled]="previewLoading">
+        Xem trước phân lớp
+      </button>
+
+      <button class="btn add-btn" (click)="applyAssign()" [disabled]="applyingAssign">
+        Phân lớp tự động
+      </button>
+    </div>
+  </div>
+
+  <!-- DANH SÁCH ĐĂNG KÝ THEO HỌC KỲ (TRÊN) -->
+  <div class="info-card">
+    <h3>Danh sách môn được đăng ký</h3>
+
+    <div *ngIf="loadingDangKyTheoHK" class="alert alert-info">Đang tải danh sách đăng ký...</div>
+
+    <table class="subject-table" *ngIf="!loadingDangKyTheoHK && dangKyTheoHK.length">
+      <thead>
+        <tr>
+          <th>Mã học phần</th>
+          <th>Tên học phần</th>
+          <th>Số lượng đăng ký</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let mon of dangKyTheoHK">
+          <td>{{ mon.ma_hoc_phan }}</td>
+          <td style="text-align:left">{{ mon.ten_hoc_phan }}</td>
+          <td>{{ mon.so_luong }}</td>
+          <td>
+            <button class="btn edit" (click)="openDangKyModal(mon)">👁 Xem DS SV</button>
+            <button class="btn warn" (click)="openSiSoModal(mon)" title="Điều chỉnh sĩ số">✏️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!loadingDangKyTheoHK && (!dangKyTheoHK || dangKyTheoHK.length === 0)" style="color:#666; padding:10px;">
+      Không có dữ liệu đăng ký cho học kỳ này.
+    </div>
+  </div>
+
+  <!-- BẢNG DANH SÁCH LHP (DƯỚI) -->
+  <div class="info-card">
+    <h3>Danh sách Lớp học phần</h3>
+
+    <div *ngIf="loading" class="alert alert-info">Đang tải dữ liệu lớp học phần...</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <table class="subject-table" *ngIf="!loading && !errorMessage && paginatedList.length">
+      <thead>
+        <tr>
+          <th>Mã LHP</th>
+          <th>Tên học phần</th>
+          <th>Giảng viên</th>
+          <th>Sĩ số</th>
+          <th>Phòng</th>
+          <th>Ngày</th>
+          <th>Ca</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let row of paginatedList">
+          <td>{{ row.ma_lop_hp }}</td>
+          <td style="text-align:left">{{ row.ten_hoc_phan }}</td>
+          <td>{{ row.giang_vien || '-' }}</td>
+          <td>{{ row.si_so_hien_tai || 0 }}/{{ row.si_so_toi_da || 20 }}</td>
+          <td>{{ row.phong || '-' }}</td>
+          <td>{{ row.thu || '-' }}</td>
+          <td>{{ row.ca || '-' }}</td>
+          <td>
+            <span [style.color]="row.trang_thai === 'Đã phân' ? 'green' : 'red'">
+              {{ row.trang_thai }}
+            </span>
+          </td>
+          <td>
+            <button class="btn edit" (click)="openDetailModal(row)">👁</button>
+            <button class="btn add-btn" (click)="openStudentModal(row)">🧑‍🎓</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!loading && !errorMessage && paginatedList.length === 0" style="color:#666; padding:10px;">
+      Không có lớp học phần cho học kỳ này.
+    </div>
+
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="page-btn" (click)="changePage(currentPage-1)" [disabled]="currentPage===1">◀ Trước</button>
+      <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+      <button class="page-btn" (click)="changePage(currentPage+1)" [disabled]="currentPage===totalPages">Sau ▶</button>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL: Chi tiết LHP -->
+<div class="modal-backdrop" *ngIf="isDetailModalOpen" (click)="closeDetailModal()"></div>
+<div class="modal" [class.open]="isDetailModalOpen">
+  <div class="modal-content">
+    <h3>Chi tiết Lớp học phần</h3>
+    <p><strong>Mã LHP:</strong> {{ detailLHP?.ma_lop_hp }}</p>
+    <p><strong>Tên:</strong> {{ detailLHP?.ten_hoc_phan }}</p>
+    <p><strong>Giảng viên:</strong> {{ detailLHP?.giang_vien }}</p>
+    <p><strong>Phòng:</strong> {{ detailLHP?.phong }}</p>
+    <p><strong>Ngày:</strong> {{ detailLHP?.thu }}</p>
+    <p><strong>Ca:</strong> {{ detailLHP?.ca }}</p>
+    <div class="modal-actions">
+      <button class="cancel-btn" (click)="closeDetailModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Danh sách sinh viên trong LHP (phân trang) -->
+<div class="modal-backdrop" *ngIf="isStudentModalOpen" (click)="closeStudentModal()"></div>
+<div class="modal" [class.open]="isStudentModalOpen">
+  <div class="modal-content">
+    <h3>Danh sách sinh viên - {{ detailLHPForStudents?.ma_lop_hp }}</h3>
+
+    <div *ngIf="loadingStudents" class="alert alert-info">Đang tải danh sách sinh viên...</div>
+
+    <table class="subject-table" *ngIf="!loadingStudents && danhSachSV && danhSachSV.length">
+      <thead>
+        <tr><th>STT</th><th>MSSV</th><th>Họ tên</th><th>Thời gian đăng ký</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sv of danhSachSVSlice; let i = index">
+          <td>{{ (studentModalPage-1)*studentModalPageSize + i + 1 }}</td>
+          <td>{{ sv.ma_sv }}</td>
+          <td style="text-align:left">{{ sv.ho_ten }}</td>
+          <td>{{ sv.thoi_gian_dang_ky }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!loadingStudents && (!danhSachSV || danhSachSV.length===0)" style="color:#666; padding:8px;">
+      Không có sinh viên.
+    </div>
+
+    <div class="pagination" *ngIf="studentModalTotalPages > 1">
+      <button class="page-btn" (click)="studentChangePage(studentModalPage-1)" [disabled]="studentModalPage===1">◀</button>
+      <span>Trang {{ studentModalPage }} / {{ studentModalTotalPages }}</span>
+      <button class="page-btn" (click)="studentChangePage(studentModalPage+1)" [disabled]="studentModalPage===studentModalTotalPages">▶</button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn cancel-btn" (click)="closeStudentModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Danh sách đăng ký theo môn (phân trang - 8 SV/trang) -->
+<div class="modal-backdrop" *ngIf="isDangKyModalOpen" (click)="closeDangKyModal()"></div>
+<div class="modal" [class.open]="isDangKyModalOpen">
+  <div class="modal-content">
+    <h3>Danh sách đăng ký: {{ dangKyMonSelected?.ma_hoc_phan }} - {{ dangKyMonSelected?.ten_hoc_phan }}</h3>
+
+    <table class="subject-table" *ngIf="dsDangKyModalSlice && dsDangKyModalSlice.length">
+      <thead>
+        <tr><th>STT</th><th>MSSV</th><th>Họ tên</th><th>Thời gian đăng ký</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let sv of dsDangKyModalSlice; let i = index">
+          <td>{{ (dsDangKyModalPage-1)*dsDangKyModalPageSize + i + 1 }}</td>
+          <td>{{ sv.ma_sv }}</td>
+          <td style="text-align:left">{{ sv.ho_ten }}</td>
+          <td>{{ sv.thoi_gian_dang_ky }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="(!dsDangKyModalSlice || dsDangKyModalSlice.length===0)" style="color:#666; padding:8px;">
+      Không có đăng ký cho môn này.
+    </div>
+
+    <div class="pagination" *ngIf="dsDangKyModalTotalPages > 1">
+      <button class="page-btn" (click)="dsDangKyModalChangePage(dsDangKyModalPage-1)" [disabled]="dsDangKyModalPage===1">◀</button>
+      <span>Trang {{ dsDangKyModalPage }} / {{ dsDangKyModalTotalPages }}</span>
+      <button class="page-btn" (click)="dsDangKyModalChangePage(dsDangKyModalPage+1)" [disabled]="dsDangKyModalPage===dsDangKyModalTotalPages">▶</button>
+    </div>
+
+    <div class="modal-actions">
+      <button class="cancel-btn" (click)="closeDangKyModal()">Đóng</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Điều chỉnh sĩ số -->
+<div class="modal-backdrop" *ngIf="isSiSoModalOpen" (click)="closeSiSoModal()"></div>
+<div class="modal" [class.open]="isSiSoModalOpen">
+  <div class="modal-content" *ngIf="selectedMonForSiSo">
+    <h3>Điều chỉnh sĩ số: {{ selectedMonForSiSo.ten_hoc_phan }}</h3>
+    <p>Mã HP: <strong>{{ selectedMonForSiSo.ma_hoc_phan }}</strong></p>
+    <p>Số lượng đăng ký hiện tại: <strong>{{ selectedMonForSiSo.so_luong }}</strong></p>
+
+    <div classs="form-group" style="margin-bottom: 15px;">
+      <label for="si_so_toi_da" style="display: block; margin-bottom: 5px;">Sĩ số tối đa (mặc định 10):</label>
+      <input type="number" id="si_so_toi_da" [(ngModel)]="siSoForm.si_so_toi_da" class="form-control" min="1"
+             style="width: 100%; padding: 8px; box-sizing: border-box;">
+    </div>
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="si_so_toi_thieu" style="display: block; margin-bottom: 5px;">Sĩ số tối thiểu (mặc định 7):</label>
+      <input type="number" id="si_so_toi_thieu" [(ngModel)]="siSoForm.si_so_toi_thieu" class="form-control" min="0"
+             style="width: 100%; padding: 8px; box-sizing: border-box;">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn cancel-btn" (click)="closeSiSoModal()" [disabled]="siSoSaving">Hủy</button>
+      <button class="btn add-btn" (click)="saveSiSo()" [disabled]="siSoSaving">
+        {{ siSoSaving ? 'Đang lưu...' : 'Lưu thay đổi' }}
+      </button>
+    </div>
+  </div>
+</div>

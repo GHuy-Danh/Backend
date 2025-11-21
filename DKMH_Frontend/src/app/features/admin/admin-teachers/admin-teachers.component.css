@@ -1,0 +1,219 @@
+/* ===== Layout ===== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filter-bar h3 {
+  color: #1565c0;
+  margin-bottom: 10px;
+}
+
+/* ===== Bộ lọc ===== */
+.filters {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filters select,
+.filters input {
+  padding: 8px 10px;
+  border: 1px solid #bbdefb;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+}
+
+.refresh-btn {
+  background-color: #42a5f5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.refresh-btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== Bảng ===== */
+.table-container h3 {
+  color: #1565c0;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 2px solid #eee;
+  text-align: left;
+  font-size: 14px;
+}
+
+thead {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+tbody tr:hover {
+  background-color: #f5f9ff;
+  transition: 0.2s;
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 13px;
+  text-align: center;
+}
+
+.status.success {
+  background-color: #c8e6c9;
+  color: #256029;
+}
+
+.status.warning {
+  background-color: #fff9c4;
+  color: #6d4c41;
+}
+
+.status.fail {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-btn {
+  background-color: #64b5f6;
+  color: white;
+  padding: 6px 10px;
+}
+
+.page-btn {
+  background-color: #42a5f5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.page-btn:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}
+
+/* ===== Modal ===== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1040;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1050;
+  width: 700px;
+  display: none;
+}
+
+.modal.open {
+  display: block;
+}
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.detail-table th,
+.detail-table td {
+  padding: 8px;
+  border: 1px solid #eee;
+}
+
+.detail-table th {
+  background-color: #f0f7ff;
+  color: #1565c0;
+  width: 40%;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background-color: #9e9e9e;
+  color: white;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.page-btn {
+  background-color: #42a5f5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.page-btn:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}
+
+.page-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}

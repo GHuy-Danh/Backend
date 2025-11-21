@@ -1,0 +1,195 @@
+<div class="content">
+  <div class="info-card toolbar">
+    <h3>Quản lý Người dùng</h3>
+    <div class="toolbar-actions">
+      <button class="btn add-btn" (click)="openAddModal()">Thêm Người dùng</button>
+      <button class="btn add-btn purple-btn" (click)="openResetPasswordModal()">Reset mật khẩu</button>
+    </div>
+  </div>
+
+  <!-- SEARCH + FILTER -->
+  <div class="info-card filter-box">
+    <input
+      class="search-input"
+      placeholder="🔍 Tìm kiếm theo ID / Họ tên / Email..."
+      [(ngModel)]="searchKey"
+      (input)="applyFilter()"
+    />
+
+    <select class="filter-select" [(ngModel)]="filterLoai" (change)="applyFilter()">
+      <option value="Tất cả">Tất cả loại tài khoản</option>
+      <option value="Sinh viên">Sinh viên</option>
+      <option value="Giảng viên">Giảng viên</option>
+      <option value="Quản trị viên">Quản trị viên</option>
+    </select>
+  </div>
+
+  <div class="info-card">
+    <h3>Danh sách Người dùng</h3>
+
+    <div *ngIf="isLoading" class="alert alert-info">Đang tải danh sách...</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <table class="subject-table" *ngIf="!isLoading && !errorMessage">
+      <thead>
+        <tr>
+          <th>Mã</th>
+          <th>Họ tên</th>
+          <th>Email</th>
+          <th>Loại</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let u of paginatedUsers">
+          <td>{{ u._id }}</td>
+          <td>{{ u.ho_ten }}</td>
+          <td>{{ u.email }}</td>
+          <td>{{ u.loai }}</td>
+          <td>
+            <button class="btn edit" (click)="openEditModal(u)">✏️</button>
+            <button class="btn delete" (click)="deleteUser(u._id)">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- PAGINATION -->
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button class="page-btn" (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+        ◀ Trước
+      </button>
+
+      <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+
+      <button class="page-btn" (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">
+        Sau ▶
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===========================
+     ADD MODAL 
+     =========================== -->
+<div class="modal-backdrop" *ngIf="isAddModalOpen" (click)="closeAddModal()"></div>
+<div class="modal" [class.open]="isAddModalOpen">
+  <div class="modal-content">
+    <h3>Thêm Người dùng mới</h3>
+
+    <form (ngSubmit)="submitAddForm()">
+
+      <div class="form-group">
+        <label>Mã người dùng</label>
+        <input [(ngModel)]="addFormModel._id" name="add_id" placeholder="Nhập mã (VD: SV2024001)" required />
+      </div>
+
+      <div class="form-group">
+        <label>Họ tên</label>
+        <input [(ngModel)]="addFormModel.ho_ten" name="add_name" placeholder="Nhập họ và tên" required />
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input [(ngModel)]="addFormModel.email" name="add_email" placeholder="Nhập email" required />
+      </div>
+
+      <div class="form-group">
+        <label>Mật khẩu</label>
+        <input [(ngModel)]="addFormModel.mat_khau" name="add_pw" placeholder="Nhập mật khẩu" required />
+      </div>
+
+      <div class="form-group">
+        <label>Loại tài khoản</label>
+        <select [(ngModel)]="addFormModel.loai" name="add_loai" required>
+          <option value="" disabled selected>-- Chọn loại tài khoản --</option>
+          <option value="Sinh viên">Sinh viên</option>
+          <option value="Giảng viên">Giảng viên</option>
+          <option value="Quản trị viên">Quản trị viên</option>
+        </select>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" (click)="closeAddModal()">Hủy</button>
+        <button class="btn add-btn" type="submit">Thêm</button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+
+<!-- ===========================
+     EDIT MODAL
+     =========================== -->
+<div class="modal-backdrop" *ngIf="isEditModalOpen" (click)="closeEditModal()"></div>
+<div class="modal" [class.open]="isEditModalOpen">
+  <div class="modal-content">
+    <h3>Cập nhật Người dùng</h3>
+
+    <form (ngSubmit)="submitEditForm()">
+
+      <div class="form-group">
+        <label>Mã người dùng:</label>
+        <input [value]="editFormModel._id" disabled />
+      </div>
+
+      <div class="form-group">
+        <label>Họ tên: <span class="old-value">{{ editOldUser?.ho_ten }}</span></label>
+        <input [(ngModel)]="editFormModel.ho_ten" name="edit_name" placeholder="Nhập họ tên mới" />
+      </div>
+
+      <div class="form-group">
+        <label>Email: <span class="old-value">{{ editOldUser?.email }}</span></label>
+        <input [(ngModel)]="editFormModel.email" name="edit_email" placeholder="Nhập email mới" />
+      </div>
+
+      <div class="form-group">
+        <label>Loại tài khoản: <span class="old-value">{{ editOldUser?.loai }}</span></label>
+        <!-- <select [(ngModel)]="editFormModel.loai" name="edit_loai">
+          <option value="">-- Chọn loại mới --</option>
+          <option value="Sinh viên">Sinh viên</option>
+          <option value="Giảng viên">Giảng viên</option>
+          <option value="Quản trị viên">Quản trị viên</option>
+        </select> -->
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="cancel-btn" (click)="closeEditModal()">Hủy</button>
+        <button class="btn add-btn" type="submit">Lưu</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- ===========================
+     RESET PASSWORD MODAL 
+     =========================== -->
+<div class="modal-backdrop" *ngIf="isResetPwModalOpen" (click)="closeResetPwModal()"></div>
+<div class="modal" [class.open]="isResetPwModalOpen">
+  <div class="modal-content">
+    <h3>Reset mật khẩu</h3>
+
+    <!-- Search ID -->
+    <div class="form-row">
+      <input [(ngModel)]="resetTargetId" placeholder="Nhập ID người dùng" />
+      <button class="btn add-btn" style="background:#0288d1" (click)="findUserForReset()">Tìm</button>
+    </div>
+
+    <!-- Info + Reset -->
+    <div *ngIf="resetTargetUser" class="reset-info">
+      <p><strong>Họ tên:</strong> {{ resetTargetUser.ho_ten }}</p>
+      <p><strong>Email:</strong> {{ resetTargetUser.email }}</p>
+      <p><strong>Loại tài khoản:</strong> {{ resetTargetUser.loai }}</p>
+
+      <div class="modal-actions">
+        <button class="cancel-btn" (click)="closeResetPwModal()">Hủy</button>
+        <button class="btn add-btn" (click)="resetPasswordNow()">Reset về “123”</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

@@ -1,0 +1,180 @@
+/* DKMH_Frontend/src/app/features/student/student-layout/student-layout.component.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5faff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #e3f2fd;
+  padding: 12px 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-bottom: 2px solid #bbdefb;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo{
+  border-radius: 12px;
+  width: 60px;
+}
+
+.student-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #90caf9;
+}
+
+.header-center h1 {
+  color: #0d47a1;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  font-size: 20px;
+  text-align: center;
+  margin: 0;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.login-btn {
+  background-color: #64b5f6;
+  color: white;
+}
+
+.logout-btn {
+  background-color: #ef5350;
+  color: white;
+  margin-left: 10px;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* ===== MAIN ===== */
+.main-content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+  gap: 20px;
+  
+}
+
+/* ===== SIDEBAR (NAVIGATION) ===== */
+.sidebar {
+  width: 240px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.05);
+  padding: 20px 10px;
+  /* Đặt z-index để sidebar không bị che bởi nội dung */
+  z-index: 10;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 15px 20px;
+  border-radius: 10px;
+  color: #0d47a1;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border-bottom: 2px solid #e3f2fd;
+}
+
+/* Khi menu được chọn */
+.sidebar li.active {
+  background-color: #e3f2fd;
+  color: #1565c0;
+  font-weight: 600;
+  border-left: 4px solid #1565c0;
+}
+
+.sidebar li:hover {
+  background-color: #eaf3ff;
+  color: #1565c0;
+}
+
+/* ===== CONTENT WRAPPER (cho router-outlet) ===== */
+.content-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto; /* Cho phép cuộn cho nội dung */
+  /* Đây là nơi các component con (như dashboard, register) được đặt */
+}
+
+/* Định nghĩa info-card chung cho các component con */
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h3 {
+  color: #1565c0;
+  margin-bottom: 10px;
+  border-left: 4px solid #64b5f6;
+  padding-left: 10px;
+}
+
+/* Thiết lập link chung */
+a {
+  color: #1e88e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  text-align: center;
+  padding: 10px 0;
+  border-top: 1px solid #bbdefb;
+  font-size: 14px;
+}

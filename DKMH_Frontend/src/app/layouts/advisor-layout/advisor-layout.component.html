@@ -1,0 +1,40 @@
+<div class="advisor-container">
+  <header class="header">
+    <div class="header-left">
+      <img src="assets/logo.png" alt="Logo" class="logo" />
+      <h2>Trang Cố vấn học tập</h2>
+    </div>
+
+    <div class="header-center">
+      <h1>HỆ THỐNG ĐĂNG KÝ TỰ CHỌN MÔN HỌC</h1>
+    </div>
+
+    <div class="header-right">
+      <button class="btn logout-btn" (click)="logout()">Đăng xuất</button>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <aside class="sidebar">
+      <ul>
+        <li routerLink="/advisor/dashboard" routerLinkActive="active">
+          Tổng quan
+        </li>
+        <li routerLink="/advisor/students" routerLinkActive="active">
+          Danh sách sinh viên
+        </li>       
+        <li routerLink="/advisor/schedule" routerLinkActive="active">
+          Lịch giảng dạy
+        </li>
+      </ul>
+    </aside>
+    <section class="content">
+      <router-outlet></router-outlet>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Hệ thống Hệ thống Đăng ký Tự chọn Môn học – Đại học Công Thương TP.HCM</p>
+  </footer>
+</div>

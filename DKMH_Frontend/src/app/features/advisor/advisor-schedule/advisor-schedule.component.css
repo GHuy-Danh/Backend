@@ -1,0 +1,317 @@
+/* ==============================
+   LAYOUT & WRAPPER
+   ============================== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 40px;
+}
+
+/* ==============================
+   WELCOME CARD
+   ============================== */
+.welcome-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%);
+  border-left: 5px solid #1565c0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  border: 1px solid #e3f2fd;
+}
+
+.welcome-content h2 {
+  margin: 0 0 8px 0;
+  color: #1565c0;
+  font-size: 1.6rem;
+}
+
+.welcome-content p {
+  margin: 0;
+  color: #546e7a;
+  font-size: 1rem;
+}
+
+.highlight {
+  color: #0d47a1;
+  font-weight: 700;
+}
+
+/* ==============================
+   INFO CARD (Container chung)
+   ============================== */
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+  border: 1px solid #f0f0f0;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.info-card h3 {
+  margin: 0;
+  color: #263238;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ==============================
+   CONTROLS & FILTERS
+   ============================== */
+.filter-controls {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-group label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #607d8b;
+}
+
+/* Week Navigator Style */
+.week-navigator {
+  display: flex;
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid #e0e0e0;
+}
+
+.nav-btn {
+  background: #fff;
+  border: 1px solid #d0d0d0;
+  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  color: #1565c0;
+  font-weight: bold;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-btn:hover {
+  background: #e3f2fd;
+  border-color: #1565c0;
+}
+
+.date-input {
+  border: none;
+  background: transparent;
+  padding: 0 12px;
+  font-family: inherit;
+  font-weight: 600;
+  color: #37474f;
+  outline: none;
+  font-size: 0.95rem;
+}
+
+/* Export Button */
+.export-btn {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #c8e6c9;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.export-btn:hover {
+  background-color: #c8e6c9;
+  transform: translateY(-2px);
+}
+
+/* ==============================
+   TABLE STYLES
+   ============================== */
+.table-scroll {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+th {
+  background-color: #f9fafb;
+  color: #546e7a;
+  font-weight: 600;
+  text-align: left;
+  padding: 14px 16px;
+  border-bottom: 2px solid #eceff1;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #f1f1f1;
+  color: #37474f;
+  font-size: 0.95rem;
+  vertical-align: middle;
+}
+
+/* Row Hover Effect */
+tbody tr {
+  transition: background-color 0.2s;
+}
+tbody tr:hover {
+  background-color: #f1f8ff !important; /* Force hover color override */
+}
+
+/* Column Widths */
+.w-day { width: 80px; }
+.w-date { width: 80px; }
+.w-session { width: 100px; }
+
+/* Text Utilities */
+.fw-bold { font-weight: 700; }
+.fw-medium { font-weight: 500; }
+.text-primary { color: #1565c0; font-weight: 600; }
+
+/* Time Badge */
+.badge-time {
+  background: #eceff1;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #455a64;
+}
+
+/* ==============================
+   ROW COLORS (Backgrounds)
+   ============================== */
+.row-theory { background-color: #ffffff; }
+.row-lab { background-color: #fafafa; }
+.row-online { background-color: #f8fdff; }
+.row-exam { background-color: #fff8f3; }
+.row-off { background-color: #fff5f5; opacity: 0.7; }
+
+/* ==============================
+   STATUS BADGES (Loại hình)
+   ============================== */
+.status-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status-badge.theory { background: #e8f5e9; color: #2e7d32; }
+.status-badge.lab { background: #fff9c4; color: #fbc02d; }
+.status-badge.online { background: #e3f2fd; color: #1565c0; }
+.status-badge.exam { background: #ffe0b2; color: #ef6c00; }
+.status-badge.off { background: #ffcdd2; color: #c62828; text-decoration: line-through; }
+
+/* ==============================
+   STATE BOXES (Loading, Error, Empty)
+   ============================== */
+.state-box {
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-weight: 500;
+}
+
+.state-box.loading { background: #f0f7ff; color: #1565c0; }
+.state-box.error { background: #ffebee; color: #c62828; }
+.state-box.empty { background: #fafafa; color: #78909c; border: 1px dashed #cfd8dc; }
+
+.spinner {
+  border: 3px solid #e3f2fd;
+  border-top: 3px solid #1565c0;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* ==============================
+   NOTE CARD (Legend)
+   ============================== */
+.note-card {
+  background: #fff;
+  padding: 15px 20px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.note-card h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #546e7a;
+}
+
+.legend-list {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: #37474f;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot.theory { background: #4caf50; }
+.dot.lab { background: #fbc02d; }
+.dot.online { background: #2196f3; }
+.dot.exam { background: #ff9800; }
+.dot.off { background: #f44336; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .filter-controls { flex-direction: column; align-items: stretch; }
+  .week-navigator { width: 100%; justify-content: space-between; }
+  .date-input { width: 100%; text-align: center; }
+}

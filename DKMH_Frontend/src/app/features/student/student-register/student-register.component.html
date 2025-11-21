@@ -1,0 +1,177 @@
+<div class="register-wrapper">
+  <div class="register-container" *ngIf="!loading; else loadingTpl">
+
+    <!-- ==== THÔNG TIN SINH VIÊN ==== -->
+    <div class="student-info-box">
+      <div class="student-left">
+        <p class="greeting">Xin chào!</p>
+        <h3>{{ ma_sv }}</h3>
+        <p><b>Trạng thái:</b> Đang học</p>
+      </div>
+      <div class="student-right">
+        <img src="assets/avatar.png" alt="Sinh viên" class="student-photo" />
+        <p class="info-text">THÔNG TIN SINH VIÊN<br />ĐĂNG KÝ HỌC PHẦN</p>
+      </div>
+    </div>
+
+    <!-- ==== COMBOBOX HỌC KỲ ==== -->
+    <div class="filter-inline" style="margin-top:12px;">
+      <label>Đợt đăng ký / Học kỳ:</label>
+      <select [(ngModel)]="selectedHocKy" (change)="onHocKyChange()">
+        <option *ngFor="let hk of hocKyList" [ngValue]="hk">
+          {{ hk.ma_hoc_ky }} - {{ hk.ten }} ({{ hk.nam_hoc }})
+        </option>
+      </select>
+    </div>
+
+    <!-- ==== BẢNG 1: MÔN HỌC PHẦN ĐANG CHỜ ĐĂNG KÝ (tải từ mon_hoc) ==== -->
+    <div class="register-section">
+      <h3>MÔN HỌC PHẦN ĐANG CHỜ ĐĂNG KÝ</h3>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Mã học phần</th>
+              <th>Tên học phần</th>
+              <th>TC</th>
+              <th>Điều kiện (a+b)</th>
+              <th>Học kỳ</th>
+              <th>Trạng thái</th>
+              <th>Thao tác</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let mon of electives; let i=index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ mon.ma_hoc_phan }}</td>
+              <td style="text-align:left">{{ mon.ten_hoc_phan }}</td>
+              <td>{{ mon.tin_chi }}</td>
+
+              <td>
+                <ng-container *ngIf="(mon.dieu_kien || []).length; else nodk">
+                  <span *ngFor="let dk of mon.dieu_kien; let last=last">
+                    <span class="dk-pill">{{ dk }}</span><span *ngIf="!last">, </span>
+                  </span>
+                </ng-container>
+                <ng-template #nodk>-</ng-template>
+              </td>
+
+              <td>{{ mon.hoc_ky }}</td>
+
+              <td>
+                <span class="status-success">Mở lớp</span>
+              </td>
+
+              <td>
+                <div style="display:flex; flex-direction:column; gap:6px; align-items:center;">
+                  <button
+                    class="btn orange"
+                    [disabled]="!canRegister(mon).ok"
+                    (click)="register(mon)"
+                  >
+                    Đăng ký
+                  </button>
+
+                  <div *ngIf="!canRegister(mon).ok" style="font-size:12px; color:#b71c1c;">
+                    {{ canRegister(mon).reason }}
+                  </div>
+
+                  <div class="small-count" style="font-size:12px; color:#666;">
+                    {{ mon.si_so_hien_tai || 0 }} / {{ mon.si_so_toi_da || 10 }}
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr *ngIf="electives.length === 0">
+              <td colspan="8" class="no-data">Không có môn học.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==== BẢNG 2: MÔN HỌC PHẦN ĐANG CHỜ XÁC NHẬN (dữ liệu từ dang_ky) ==== -->
+    <div class="register-section">
+      <h3>MÔN HỌC PHẦN ĐANG CHỜ XÁC NHẬN</h3>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Mã học phần</th>
+              <th>Tên học phần</th>
+              <th>TC</th>
+              <th>Học kỳ</th>
+              <th>Trạng thái</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let dk of pendingCourses; let i=index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ dk.ma_hoc_phan }}</td>
+              <td style="text-align:left">{{ dk.ten_hoc_phan }}</td>
+              <td>{{ dk.so_tin_chi || dk.tin_chi || '-' }}</td>
+              <td>{{ dk.hoc_ky }}</td>
+              <td><span class="status pending">{{ dk.trang_thai?.tinh_trang }}</span></td>
+              <td>
+                <button class="btn gray" (click)="cancel(dk)">Hủy</button>
+              </td>
+            </tr>
+
+            <tr *ngIf="pendingCourses.length === 0">
+              <td colspan="7" class="no-data">Chưa có đăng ký nào.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==== BẢNG 3: HOÀN TẤT ==== -->
+<!-- 5. BẢNG 3: ĐÃ HOÀN TẤT (Cập nhật Cột) -->
+    <div class="register-section">
+      <h3>MÔN HỌC PHẦN ĐÃ HOÀN TẤT ĐĂNG KÝ</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>Mã Lớp HP</th> <!-- Cột mới -->
+              <th>Tên học phần</th>
+              <th>TC</th>
+              <th>Ngày ĐK</th> <!-- Cột mới -->
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dk of completedCourses; let i=index">
+              <td>{{ i + 1 }}</td>
+              <td>{{ dk.ma_lop_hp }}</td>
+              <td class="text-left">{{ dk.ten_hoc_phan }}</td>
+              <td>{{ dk.tin_chi }}</td>
+              <td>{{ dk.thoi_gian_dang_ky | date:'dd/MM/yyyy' }}</td>
+              <td><span class="status done">Đăng ký thành công</span></td>
+        
+            </tr>
+            <tr *ngIf="completedCourses.length === 0"><td colspan="7" class="no-data">Chưa có môn hoàn tất.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="summary-box">
+      <p><b>Tổng tín chỉ hiện tại:</b> {{ getCurrentCredits() }} / {{ creditLimit }}</p>
+    </div>
+  </div>
+
+  <ng-template #loadingTpl>
+    <div class="loading">⏳ Đang tải dữ liệu...</div>
+  </ng-template>
+</div>
+

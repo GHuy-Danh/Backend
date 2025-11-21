@@ -1,0 +1,245 @@
+/* DKMH_Frontend/src/app/features/advisor/students/advisor-students.component.css */
+
+/* ==============================
+   WRAPPER & LAYOUT
+   ============================== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 30px;
+}
+
+/* Card Styles (Info & Welcome) */
+.welcome-card, .info-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+  border: 1px solid #f0f0f0;
+}
+
+.welcome-card h2 {
+  margin: 0 0 8px 0;
+  color: #1565c0;
+}
+.welcome-card p { margin: 0; color: #666; }
+
+.info-card h3 {
+  margin: 0 0 15px 0;
+  color: #1565c0;
+  font-weight: 700;
+  font-size: 18px;
+  border-bottom: 2px solid #f5f5f5;
+  padding-bottom: 10px;
+}
+
+/* ==============================
+   FILTER SECTION
+   ============================== */
+.filter-card {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.filter-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.filter-controls input,
+.filter-controls select {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #d0d7de;
+  outline: none;
+  font-size: 14px;
+  min-width: 250px;
+  transition: border-color 0.2s;
+}
+
+.filter-controls input:focus,
+.filter-controls select:focus {
+  border-color: #1976d2;
+}
+
+/* Buttons */
+.btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.search-btn {
+  background-color: #1976d2;
+  color: white;
+}
+.search-btn:hover { background-color: #1565c0; }
+
+/* ==============================
+   TABLE STYLES
+   ============================== */
+.table-scroll {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+thead th {
+  background: #eaf3ff;
+  color: #0d47a1;
+  padding: 12px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid #dbeafe;
+}
+
+td {
+  padding: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  text-align: left;
+  color: #333;
+  vertical-align: middle;
+}
+
+tbody tr:hover td {
+  background: #fbfdff;
+}
+
+/* Status Badges */
+/* .status {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+}
+.status.success { background-color: #e8f5e9; color: #2e7d32; }
+.status.warning { background-color: #fffde7; color: #f9a825; }
+.status.danger { background-color: #ffebee; color: #c62828; } */
+
+/* View Button */
+.btn-view {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #bbdefb;
+  background: #e3f2fd;
+  color: #1565c0;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+.btn-view:hover {
+  background: #1565c0;
+  color: #fff;
+}
+
+/* Alerts & Loading */
+.loading-message, .alert-warning, .error-message {
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+  margin: 15px 0;
+}
+.loading-message { background: #e3f2fd; color: #0d47a1; }
+.error-message { background: #ffebee; color: #c62828; }
+.alert-warning { background: #fff8e1; color: #f57f17; }
+
+/* ==============================
+   MODAL STYLES (Chuẩn Admin Classes)
+   ============================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 100;
+  backdrop-filter: blur(2px);
+}
+
+.modal {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px; /* Độ rộng vừa phải cho thông tin SV */
+  max-width: 95%;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  z-index: 110;
+  top: -100vh; /* Ẩn bên trên */
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nảy nhẹ */
+}
+
+.modal.open {
+  top: 10vh; /* Vị trí xuất hiện */
+  opacity: 1;
+}
+
+.modal-content {
+  padding: 24px;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #1565c0;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* Style cho các dòng thông tin chi tiết */
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+  font-size: 15px;
+}
+
+.detail-row label {
+  font-weight: 600;
+  color: #555;
+  width: 40%;
+}
+
+.detail-row span {
+  color: #333;
+  font-weight: 500;
+  width: 100%;
+}
+
+/* Modal Actions */
+.modal-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.cancel-btn {
+  background-color: #757575;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.cancel-btn:hover {
+  background-color: #616161;
+}

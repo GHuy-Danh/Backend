@@ -1,0 +1,352 @@
+/* DKMH_Frontend/src/app/features/student/register/student-register.component.css */
+
+/* Nền tổng thể */
+.register-wrapper {
+  background-color: #f5faff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+/* Khung chính */
+.register-container {
+  background: #fff;
+  width: 95%; /* Tăng chiều rộng trên màn hình lớn */
+  max-width: 1400px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px 40px;
+  border-top: 4px solid #1565c0;
+}
+
+/* Header thông tin SV */
+.student-info-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e3f2fd;
+  border-radius: 8px;
+  padding: 15px 25px;
+  margin-bottom: 20px;
+  border: 1px solid #bbdefb;
+}
+
+.student-left {
+  flex-grow: 1;
+}
+
+.student-left h3 {
+  color: #0d47a1;
+  margin: 5px 0;
+  font-size: 1.5rem;
+}
+
+.student-left p {
+  margin: 2px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.greeting {
+    font-weight: 500;
+    color: #444;
+}
+
+.student-right {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.student-photo {
+  width: 80px;
+  height: 100px;
+  object-fit: cover;
+  border: 2px solid #90caf9;
+  border-radius: 4px;
+}
+
+.info-text {
+  text-align: center;
+  color: #1565c0;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+/* Thanh chọn đợt */
+.register-header {
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #bbdefb;
+  padding-bottom: 15px;
+}
+
+.register-header h2 {
+  color: #0d47a1;
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.register-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.register-options select,
+.register-options input[type="radio"] {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #bbdefb;
+  font-size: 14px;
+}
+
+.register-options label {
+    font-size: 15px;
+    font-weight: 500;
+    color: #333;
+}
+
+.register-options input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Phần bảng */
+.register-section {
+  margin-top: 30px;
+}
+
+.register-section h3 {
+  color: #ef6c00;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
+  border-left: 4px solid #ff9800;
+  padding-left: 10px;
+}
+
+.table-scroll {
+    overflow-x: auto; /* Cho phép cuộn ngang */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 1000px; /* Đảm bảo bảng có chiều rộng tối thiểu */
+}
+
+th {
+  background-color: #1565c0;
+  color: white;
+  padding: 10px 8px;
+  border: 1px solid #bbdefb;
+  font-weight: 600;
+  text-align: center;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+tbody tr:hover {
+  background-color: #f0f7ff;
+  cursor: pointer;
+}
+
+.no-data {
+  color: #777;
+  text-align: center;
+  padding: 20px 0;
+  font-style: italic;
+}
+
+/* Bộ lọc inline */
+.filter-inline {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.filter-inline label {
+    font-weight: 500;
+}
+
+.filter-inline select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #bbdefb;
+}
+
+
+/* Nút và trạng thái */
+.btn {
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn.orange {
+  background-color: #ff9800;
+  color: #fff;
+}
+
+.btn.gray {
+  background-color: #ccc;
+  color: #333;
+  margin-top: 15px;
+  display: block;
+  width: 200px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.status.done {
+  background-color: #c8e6c9;
+  color: #256029;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-weight: 500;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: #0d47a1;
+  font-size: 13px;
+  margin-top: 30px;
+  border-top: 1px solid #bbdefb;
+  padding-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .register-container {
+        padding: 20px;
+    }
+    .student-info-box {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .student-right {
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+    .register-options {
+        justify-content: flex-start;
+    }
+    .filter-inline {
+        flex-wrap: wrap;
+    }
+}
+
+/* ====== Bổ sung cho chức năng đăng ký môn tự chọn ====== */
+
+/* Alert thông báo */
+.alert-box {
+  background-color: #fff8e1;
+  color: #795548;
+  border: 1px solid #ffe082;
+  border-radius: 6px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Trạng thái */
+.status-success {
+  background-color: #c8e6c9;
+  color: #256029;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.status-error {
+  background-color: #ffcdd2;
+  color: #b71c1c;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.status.pending {
+  background-color: #fff59d;
+  color: #795548;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.summary-box {
+  margin-top: 20px;
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 8px;
+  padding: 12px 18px;
+  text-align: right;
+  font-size: 15px;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+/* Nút trong bảng */
+table .btn {
+  padding: 5px 10px;
+  font-size: 13px;
+  margin: 0 4px;
+  border-radius: 6px;
+}
+
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #1565c0;
+  font-weight: 600;
+  margin-top: 100px;
+}
+
+.dk-pill {
+  background:#e3f2fd;
+  padding:3px 8px;
+  border-radius:6px;
+  color:#0d47a1;
+  font-weight:500;
+}
+
+.btn.orange:disabled {
+  background-color: #bdbdbd !important;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.register-section table td:last-child {
+    text-align: center;
+}
+
+.btn.gray {
+    margin: 0 auto;
+    display: inline-block;
+}
+
+
+

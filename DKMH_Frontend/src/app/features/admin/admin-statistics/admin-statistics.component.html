@@ -1,0 +1,117 @@
+<div class="content">
+  <!-- TOOLBAR -->
+  <div class="info-card toolbar">
+    <h3>Thống kê & Báo cáo</h3>
+    <div class="toolbar-actions">
+      <select class="filter-select" [(ngModel)]="selectedHocKy" (change)="onHocKyChange()">
+        <option [value]="1">Học kỳ 1</option>
+        <option [value]="2">Học kỳ 2</option>
+        <option [value]="3">Học kỳ 3</option>
+        <option [value]="4">Học kỳ 4</option>
+        <option [value]="5">Học kỳ 5</option>
+        <option [value]="6">Học kỳ 6</option>
+        <option [value]="7">Học kỳ 7</option>
+        <option [value]="8">Học kỳ 8</option>
+      </select>
+      
+      <button class="btn export-btn" (click)="exportExcel()">
+        Xuất Báo Cáo (Excel)
+      </button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD CARDS -->
+  <div class="stats-grid">
+    <div class="stat-card blue">
+      <div class="icon">🎓</div>
+      <div class="info">
+        <span class="label">Tổng lượt đăng ký</span>
+        <span class="value">{{ stats.tong_luot_dang_ky }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card purple">
+      <div class="icon">📚</div>
+      <div class="info">
+        <span class="label">Tổng số lớp</span>
+        <span class="value">{{ stats.tong_so_lop }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card green">
+      <div class="icon">✅</div>
+      <div class="info">
+        <span class="label">Lớp được mở</span>
+        <span class="value">{{ stats.lop_duoc_mo }}</span>
+      </div>
+    </div>
+
+    <div class="stat-card red">
+      <div class="icon">⚠️</div>
+      <div class="info">
+        <span class="label">Lớp sẽ hủy</span>
+        <span class="value">{{ stats.lop_se_huy }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="charts-container">
+    <!-- BẢNG CHI TIẾT -->
+    <div class="info-card main-table">
+      <h3>Chi tiết Trạng thái Lớp học phần</h3>
+      <div *ngIf="isLoading" style="padding:20px; text-align:center">⏳ Đang tải dữ liệu...</div>
+      
+      <div class="table-scroll" *ngIf="!isLoading">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã LHP</th>
+              <th>Tên học phần</th>
+              <th>Sĩ số</th>
+              <th>Tối thiểu</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let lop of stats.chi_tiet">
+              <td>{{ lop.ma_lop_hp }}</td>
+              <td>{{ lop.ten_hoc_phan }}</td>
+              <td>
+                <div class="progress-wrapper">
+                  <span>{{ lop.si_so }}/{{ lop.toi_da }}</span>
+                  <div class="progress-bar">
+                    <div class="fill" 
+                         [style.width.%]="(lop.si_so / lop.toi_da) * 100"
+                         [style.background-color]="lop.trang_thai === 'Được mở' ? '#4caf50' : '#f44336'">
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td>{{ lop.toi_thieu }}</td>
+              <td>
+                <span [class]="'badge ' + (lop.trang_thai === 'Được mở' ? 'success' : 'danger')">
+                  {{ lop.trang_thai }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TOP MÔN HỌC (Bảng nhỏ bên phải) -->
+    <div class="info-card side-table">
+      <h3>🔥 Top Môn Đăng Ký Nhiều</h3>
+      <ul class="top-list">
+        <li *ngFor="let sub of topSubjects; let i = index">
+          <span class="rank">{{ i + 1 }}</span>
+          <div class="sub-info">
+            <strong>{{ sub.ten_hoc_phan }}</strong>
+            <small>{{ sub.ma_hoc_phan }}</small>
+          </div>
+          <span class="count">{{ sub.so_luong }} SV</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

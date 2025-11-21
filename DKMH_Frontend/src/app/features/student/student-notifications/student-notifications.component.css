@@ -1,0 +1,116 @@
+/* DKMH_Frontend/src/app/features/student/notifications/student-notifications.component.css */
+
+/* Content wrapper trong component con */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Thẻ tiêu đề (Dùng lại welcome-card từ dashboard) */
+.welcome-card {
+  background-color: #bbdefb;
+  color: #0d47a1;
+  padding: 15px 20px;
+  border-radius: 14px;
+  font-weight: 600;
+}
+
+.welcome-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* ===== FILTER BAR (Thanh tìm kiếm và lọc) ===== */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-bar select,
+.filter-bar input {
+  padding: 8px 12px;
+  border: 1px solid #bbdefb;
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 14px;
+  outline: none;
+}
+
+.filter-bar input {
+    flex-grow: 1; /* Cho phép ô tìm kiếm mở rộng */
+}
+
+.filter-bar select:focus,
+.filter-bar input:focus {
+  border-color: #42a5f5;
+  box-shadow: 0 0 0 2px rgba(66, 165, 245, 0.2);
+}
+
+
+/* ===== THÔNG BÁO (List) ===== */
+
+/* Dùng lại info-card style từ layout */
+.notifications-list h3 {
+  color: #1565c0;
+  margin-bottom: 10px;
+  border-left: 4px solid #64b5f6;
+  padding-left: 10px;
+}
+
+.notifications-list ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.notification {
+  padding: 15px;
+  border-radius: 12px;
+  background-color: #f8fbff; /* Nền nhạt cho thông báo đã đọc */
+  margin-bottom: 10px;
+  border: 1px solid #e0eafc;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Thông báo chưa đọc nổi bật hơn */
+.notification.unread {
+  background-color: #e3f2fd; /* Nền xanh nhạt hơn */
+  border-left: 4px solid #42a5f5; /* Đường viền xanh nổi bật */
+  font-weight: 500;
+}
+
+.notification:hover {
+  background-color: #f0f7ff;
+}
+
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.notif-header h4 {
+  color: #0d47a1;
+  font-weight: 600;
+  margin: 0;
+  font-size: 16px;
+  flex-grow: 1;
+}
+
+.notif-header .date {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap; /* Đảm bảo ngày không bị xuống dòng */
+}
+
+.notification p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}

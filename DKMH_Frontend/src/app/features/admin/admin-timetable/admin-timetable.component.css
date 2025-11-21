@@ -1,0 +1,268 @@
+/* DKMH_Frontend/src/app/features/admin/admin-timetable/admin-timetable.component.css */
+
+/* Nhúng toàn bộ CSS từ admin-users.component.css để đảm bảo đồng bộ */
+
+/* ===== CONTENT WRAPPER ===== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h3 {
+  color: #1565c0;
+  margin-bottom: 15px;
+}
+
+/* ===== TABLE (Dùng chung với Admin Users) ===== */
+.subject-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.subject-table th,
+.subject-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.subject-table th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+/* Nâng cấp cho bảng lịch học: Hàng chính có thể click */
+.subject-table .main-row {
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.subject-table .main-row:hover {
+    background-color: #f0f8ff; /* Light blue hover */
+}
+
+/* Ẩn border dưới của hàng chính khi hàng chi tiết mở */
+.subject-table .main-row:has(+ tr) {
+    border-bottom: none;
+}
+
+/* NỘI DUNG CHI TIẾT LỚP HỌC */
+.details-cell {
+    padding: 0;
+    border: none !important;
+}
+
+.details-content {
+    background-color: #fcfcfc;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    margin-top: -1px; /* Kéo lên để che border của hàng chính */
+}
+
+.details-content h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #0288d1;
+    font-size: 1.1em;
+}
+
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.detail-table th,
+.detail-table td {
+    border: 1px solid #e0e0e0;
+    padding: 8px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.detail-table th {
+    background-color: #f5f5f5;
+    color: #424242;
+    font-weight: 500;
+}
+
+/* ===== FORM VÀ MODAL (Dùng chung) ===== */
+
+input,
+select,
+textarea {
+  padding: 8px 10px;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  outline: none;
+  width: 100%; /* Đảm bảo textarea cũng full width */
+  box-sizing: border-box;
+}
+
+/* ===== BUTTONS (Dùng chung) ===== */
+.btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.add-btn {
+  background-color: #2e7d32; 
+  padding: 6px 10px;
+  margin-right: 5px;
+}
+
+/* Nút trong bảng */
+.edit {
+  background-color: #64b5f6;
+  color: white;
+  padding: 6px 10px;
+  margin-right: 5px;
+}
+
+.delete {
+  background-color: #ef5350;
+  color: white;
+  padding: 6px 10px;
+}
+
+.alert {
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+.alert-info {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    border: 1px solid #90caf9;
+}
+.alert-warning {
+    background-color: #fff3e0;
+    color: #ff6f00;
+    border: 1px solid #ffcc80;
+}
+
+/* Lớp nền tối phía sau modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1040;
+}
+
+/* Khung modal chính */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1050;
+    
+    max-width: 500px;
+    width: 90%;
+    
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal.open {
+    display: block;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toolbar h3 {
+    margin: 0;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.cancel-btn {
+  background-color: #9e9e9e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-btn:hover {
+  background-color: #757575;
+  opacity: 0.9;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+}
+
+/* ==== FORM GROUP ==== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}

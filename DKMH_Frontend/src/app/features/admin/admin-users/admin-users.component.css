@@ -1,0 +1,278 @@
+/* DKMH_Frontend/src/app/features/admin/subjects/admin-subjects.component.css */
+
+/* ===== CONTENT WRAPPER ===== */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h3 {
+  color: #1565c0;
+  margin-bottom: 15px;
+}
+
+/* ===== TABLE ===== */
+.subject-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.subject-table th,
+.subject-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.subject-table th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+}
+
+/* ===== FORM THÊM MÔN HỌC ===== */
+.form-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Khoảng cách giữa các hàng */
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1; /* Chia đều chiều rộng */
+}
+
+input,
+select {
+  padding: 8px 10px;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  outline: none;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+  color: white; /* Đảm bảo chữ trắng cho các nút thao tác */
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.add-btn {
+  background-color: #2e7d32; /* Đổi thành màu xanh lá cây đậm cho nút Thêm trong form */
+  flex-basis: 150px; /* Giới hạn chiều rộng nút Thêm */
+  margin-left: auto; /* Đẩy nút Thêm sang phải */
+}
+
+/* Nút trong bảng */
+.edit {
+  background-color: #64b5f6;
+  color: white;
+  padding: 6px 10px;
+  margin-right: 5px;
+}
+
+.delete {
+  background-color: #ef5350;
+  color: white;
+  padding: 6px 10px;
+}
+/* Lớp nền tối phía sau modal */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Nền tối nhẹ */
+    z-index: 1040; /* Đảm bảo nó nằm trên mọi thứ (dùng số cao) */
+}
+
+/* Khung modal chính */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Canh giữa tuyệt đối */
+    
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1050; /* Cao hơn backdrop */
+    
+    max-width: 600px;
+    width: 90%; /* Chiếm 90% chiều rộng màn hình */
+    
+    display: none; /* Mặc định ẩn, được bật bằng [class.open] trong HTML */
+    animation: fadeIn 0.3s ease-out; /* Hiệu ứng nhỏ */
+}
+
+.modal.open {
+    display: block; /* Hiện khi isModalOpen = true */
+}
+
+/* Các phần tử bên trong modal */
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end; /* Đẩy các nút về bên phải */
+    gap: 10px;
+    margin-top: 25px;
+}
+
+/* Thêm một số CSS cho form-row để đảm bảo căn chỉnh trong modal */
+.modal .form-row {
+    margin-bottom: 15px;
+    gap: 15px; /* Điều chỉnh khoảng cách giữa các input */
+}
+
+/* Hiệu ứng mờ dần */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toolbar h3 {
+    margin: 0; /* Bỏ margin mặc định của h3 */
+}
+
+/* Nút Thêm trên Toolbar */
+.toolbar .add-btn {
+    background-color: #2e7d32;
+    margin-left: 0; /* Reset margin-left */
+    flex-basis: auto; /* Reset flex-basis */
+}
+
+.cancel-btn {
+  background-color: #9e9e9e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.cancel-btn:hover {
+  background-color: #757575;
+  opacity: 0.9;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.page-btn {
+  background-color: #42a5f5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.page-btn:disabled {
+  background-color: #90caf9;
+  cursor: not-allowed;
+}
+
+.page-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+.filter-box {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+}
+
+.purple-btn {
+  background-color: #6a1b9a !important;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ==== FORM GROUP ==== */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #b0bec5;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+.old-value {
+  color: #1565c0;
+  font-weight: 600;
+}

@@ -1,0 +1,258 @@
+/* DKMH_Frontend/src/app/features/student/timetable/student-timetable.component.css */
+
+/* Content wrapper trong component con */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+/* ===== TIMETABLE CONTAINER ===== */
+.timetable-container {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Đổ bóng rõ ràng hơn */
+}
+
+.timetable-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px; /* Tăng khoảng cách */
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.timetable-header h2 {
+  color: #1565c0;
+  font-weight: 700;
+  font-size: 1.6rem; /* Phóng to hơn */
+  border-left: 5px solid #64b5f6; /* Viền đậm hơn */
+  padding-left: 12px;
+  margin: 0;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  font-weight: 500;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.controls input[type="date"] {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd; /* Viền sáng hơn */
+  background-color: #f7f7f7; /* Nền nhẹ */
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.controls input[type="date"]:focus {
+    border-color: #1565c0;
+}
+
+.controls .btn {
+  padding: 8px 14px;
+  background-color: #42a5f5; /* Xanh dương */
+  color: #fff;
+  border: none;
+  border-radius: 8px; /* Bo góc nút */
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.controls .btn:hover {
+  background-color: #1565c0;
+}
+
+/* ===== TIMETABLE TABLE ===== */
+.timetable-scroll {
+  overflow-x: auto;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px; /* Bo góc nhẹ */
+}
+
+.timetable-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  min-width: 1000px;
+}
+
+.timetable-table th,
+.timetable-table td {
+  border: 2px solid #f0f0f0; /* Viền mỏng hơn, nhạt hơn */
+  text-align: center;
+  vertical-align: top;
+  padding: 5px; /* Giảm padding */
+  height: 70px;
+  width: 12%;
+}
+
+.timetable-table th {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 5px; /* Tăng padding trên dưới */
+  border-bottom: 2px solid #90caf9;
+}
+
+.session {
+  background-color: #fffde7; /* Màu kem nhạt */
+  color: #616161;
+  font-weight: 700;
+  width: 100px;
+  vertical-align: middle;
+}
+
+/* Course block */
+.course {
+  padding: 6px 8px; /* Giảm padding */
+  border-radius: 6px;
+  color: #333; /* Màu chữ mặc định tối hơn */
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: left;
+  margin-bottom: 6px;
+  /* box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); */ /* Bỏ đổ bóng để sạch hơn */
+  overflow: hidden;
+  height: auto;
+  min-height: 100px; /* Đảm bảo chiều cao tối thiểu */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.course:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.course b {
+  font-size: 0.85rem;
+  display: block;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+/* Course colors (ĐÃ ĐỒNG BỘ) */
+
+/* Lý thuyết: Màu nhạt (#b7c5b8) -> Xanh xám nhạt */
+.course.theory {
+  background-color: #e0f2f1; /* Tonal màu nhẹ nhàng hơn */
+  border-color: #b2dfdb;
+  color: #004d40;
+}
+
+/* Thực hành: Màu đậm hơn (#2e7d32) */
+.course.lab {
+  background-color: #bdf0c1; /* Xanh lá nhạt */
+  border-color: #79bc7b;
+  color: #0e6414;
+}
+
+/* Trực tuyến: Xanh dương sáng */
+.course.online {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+  color: #0d47a1;
+}
+
+/* Lịch thi: Cam (#ff9800) */
+.course.exam {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+  color: #e65100;
+}
+
+/* Nghỉ học: Đỏ (#e53935) */
+.course.off {
+  background-color: #ffebee;
+  border-color: #ffcdd2;
+  color: #c62828;
+}
+
+.course.off b, .course.off {
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+
+/* Legend */
+.legend {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  border-top: 1px solid #eee;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  color: #555;
+  font-weight: 500;
+}
+
+.box {
+  width: 18px; /* Nhỏ hơn một chút */
+  height: 18px;
+  border-radius: 4px;
+  margin-right: 8px;
+  display: inline-block;
+  border: 1px solid #ccc;
+}
+
+/* Đồng bộ Legend với Course Colors */
+.box.theory {
+  background-color: #e0f2f1; 
+  border-color: #b2dfdb;
+}
+
+.box.lab {
+  background-color: #e8f5e9;
+  border-color: #a5d6a7;
+}
+
+.box.online {
+  background-color: #e3f2fd;
+  border-color: #90caf9;
+}
+
+.box.exam {
+  background-color: #fff3e0;
+  border-color: #ffcc80;
+}
+
+.box.off {
+  background-color: #ffebee;
+  border-color: #ffcdd2;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timetable-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .controls {
+    justify-content: flex-start;
+  }
+}

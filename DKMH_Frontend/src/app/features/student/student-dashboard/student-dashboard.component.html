@@ -1,0 +1,92 @@
+<div class="student-dashboard">
+  <div class="top-row">
+    <!-- PROFILE CARD -->
+    <div class="profile-card">
+      <div class="profile-head">
+        <img [src]="'assets/avatar.png'" alt="avatar" class="avatar" />
+        <div class="name-block">
+          <h3>{{ student?.ho_ten || 'Sinh viên' }}</h3>
+          <small class="muted">{{ student?._id || student?.ma_sv || '-' }}</small>
+        </div>
+      </div>
+
+      <div class="profile-body">
+        <div class="field"><label>Giới tính:</label><span>{{ student?.gioi_tinh || '-' }}</span></div>
+        <div class="field"><label>Ngày sinh:</label><span>{{ student?.ngay_sinh ? (student.ngay_sinh | date:'dd/MM/yyyy') : '-' }}</span></div>
+        <div class="field"><label>Lớp:</label><span>{{ student?.lop || '-' }}</span></div>
+        <div class="field"><label>Ngành:</label><span>{{ student?.nganh_hoc || '-' }}</span></div>
+        <div class="field"><label>Email:</label><span>{{ student?.email || '-' }}</span></div>
+        <div class="field"><label>Điện thoại:</label><span>{{ student?.so_dien_thoai || '-' }}</span></div>
+      </div>
+
+      <div class="profile-actions">
+        <button class="btn primary" (click)="goTo('/student/profile')">Xem hồ sơ</button>
+      </div>
+    </div>
+
+    <!-- CENTER: Quick actions + Progress -->
+    <div class="center-column">
+      <div class="quick-actions">
+        <div class="actions-title">
+          <h4>Truy cập nhanh</h4>
+          
+        </div>
+        <div class="actions-grid">
+          <button *ngFor="let a of actions" class="action-card" [style.border-color]="a.color" (click)="goTo(a.route)">
+            <div class="icon">{{ a.icon }}</div>
+            <div class="title">{{ a.title }}</div>
+          </button>
+        </div>
+      </div>
+
+      <div class="progress-card">
+        <div class="pc-head">
+          <h4>Tiến độ học tập</h4>
+          <small class="muted">Tín chỉ đã tích lũy</small>
+        </div>
+
+        <div class="pc-body">
+          <div class="donut">
+            <p-chart 
+                type="doughnut"
+                [data]="donutData"
+                [options]="donutOptions">
+            </p-chart>
+
+            <div class="donut-center">
+              <div *ngIf="creditsLoading">Đang tải...</div>
+              <div *ngIf="!creditsLoading && (registeredCredits === null || totalCreditsAll === null)">Chưa có dữ liệu</div>
+              <div *ngIf="!creditsLoading && registeredCredits !== null && totalCreditsAll !== null">
+                <div class="num">{{ registeredCredits }}</div>
+                <div class="label">/ {{ totalCreditsAll }} TC</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pc-info">
+
+            <div class="stat">
+              <div class="num">{{ registeredCredits ?? '-' }}</div>
+              <div class="label">TC đã đăng ký</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER / EXTRA -->
+  <div class="bottom-row">
+    <div class="card">
+      <h4>Ghi chú</h4>
+      <p class="muted">Nếu bạn thấy dữ liệu thiếu, vui lòng liên hệ học vụ để cập nhật thông tin.</p>
+    </div>
+    <div class="card">
+      <h4>Tài nguyên</h4>
+      <ul class="links">
+        <li><a routerLink="/student/register">Hệ thống đăng ký</a></li>
+        <li><a routerLink="/student/timetable">Lịch học</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
